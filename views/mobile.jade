@@ -1,0 +1,33 @@
+!!! 5
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title #{title}
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+        script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
+        script(type='text/javascript')
+            $(document).bind('pageinit', function() {
+                $('#play').tap(function() {
+                    $.get('/player/#{id}/play', function() {});
+                });
+                $('#pause').tap(function() {
+                    $.get('/player/#{id}/pause', function() {});
+                });
+                $('#next').tap(function() {
+                    $.get('/player/#{id}/next', function() {});
+                });
+                $('#prev').tap(function() {
+                    $.get('/player/#{id}/prev', function() {});
+                });
+            });
+    body
+        #page1(data-role="page")
+            #header(data-theme="a", data-role="header")
+                h3 player.io
+            #content(data-role="content")
+                a(href="#", id="play", data-role="button", data-transition="fade", data-theme="a", data-icon="minus", data-iconpos="left") Play
+                a(href="#", id="pause", data-role="button", data-transition="fade", data-icon="arrow-u", data-iconpos="left") Pause
+                a(href="#", id="next", data-role="button", data-transition="fade", data-icon="arrow-d", data-iconpos="left") Next
+                a(href="#", id="prev", data-role="button", data-transition="fade", data-theme="a", data-icon="plus", data-iconpos="left") Prev
