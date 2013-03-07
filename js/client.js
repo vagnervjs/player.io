@@ -20,9 +20,8 @@ socket.on('play', function (data) {
         media.play();
     } else if (data.action == 'pause'){
         media.pause();
-    }
-    else if (data.action == 'fullscreen'){
-
+    } else if (data.action == 'fullscreen'){
+        media.webkitRequestFullScreen();
     }
 });
 
