@@ -15,8 +15,8 @@ html
                 $('#pause').tap(function() {
                     $.get('/player/#{id}/pause', function() {});
                 });
-                $('#next').tap(function() {
-                    $.get('/player/#{id}/next', function() {});
+                $('#fullscreen').tap(function() {
+                    $.get('/player/#{id}/fullscreen', function() {});
                 });
                 $('#prev').tap(function() {
                     $.get('/player/#{id}/prev', function() {});
@@ -29,5 +29,5 @@ html
             #content(data-role="content")
                 a(href="#", id="play", data-role="button", data-transition="fade", data-theme="a", data-icon="minus", data-iconpos="left") Play
                 a(href="#", id="pause", data-role="button", data-transition="fade", data-icon="arrow-u", data-iconpos="left") Pause
-                a(href="#", id="next", data-role="button", data-transition="fade", data-icon="arrow-d", data-iconpos="left") Next
+                a(href="#", id="fullscreen", data-role="button", data-transition="fade", data-icon="arrow-d", data-iconpos="left") fullscreen
                 a(href="#", id="prev", data-role="button", data-transition="fade", data-theme="a", data-icon="plus", data-iconpos="left") Prev

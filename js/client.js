@@ -11,18 +11,22 @@ function randomId() {
 var id = randomId();
 
 var socket = io.connect('http://localhost:8080');
-var v = document.getElementById("player");
+
 
 socket.emit('setId', id);
 socket.on('play', function (data) {
     console.log(data);
+    var media = fv;
     
     if (data.action == 'play') {
-        v.play();
+        media.play();
     } else if (data.action == 'pause'){
-        v.pause();
+        media.pause();
+    }
+    else if (data.action == 'fullscreen'){
+        media.toggleFullScreen();
     }
 });
 
 
-document.write('<br/><br/> <a href="http://localhost:8000/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
+$("#qr").html('<a href="http://localhost:8000/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');

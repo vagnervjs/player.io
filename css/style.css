@@ -1,0 +1,13 @@
+body {
+  background: #27282C url(../img/bg.png) repeat;
+}
+
+#player {
+	background: #000000;
+	-webkit-box-shadow: 0 0 20px #000;
+	-moz-box-shadow: 0 0 20px #000;
+	width: 800px;
+	height: 480px;
+	overflow: none;
+	margin: 5% auto;
+}

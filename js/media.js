@@ -26,11 +26,12 @@
             }
             if (isError) {
                 return;
-            }
+            } else{
+                //var fileURL = URL.createObjectURL(file);
+                var fileURL = URL.createObjectURL(file);
+                playMedia(fileURL, type);
 
-            var fileURL = URL.createObjectURL(file);
-            videoNode.src = fileURL;
-            console.log(fileURL);
+            }
         },
         inputNode = document.querySelector('input');
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -43,3 +44,16 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     inputNode.addEventListener('change', playSelectedFile, false);
 }(window));
+
+function playMedia(url, type){
+    fv.load([
+    {
+      src:  url,
+      type: type
+    }
+    ]);
+}
+
+jQuery(document).ready(function($) {
+    fv = $("#player").flareVideo();
+});
