@@ -12,19 +12,19 @@
 </head>
 <body>
 	<section>
-		<div id="message"></div>
-		<div id="qr"></div>
 		<label for="file">
 			Choice a file: <input type="file" name="file"/>
     	</label>
-    	<div id="player"></div>
+    	<div id="message"></div>
+    	<div id="qr"></div>
+    	
+    	<div class="player-cont">
+    		<video id="player" autobuffer controls></video>
+    	</div>
 	</section>
 
 	<!-- JS Files -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="js/flarevideo/jquery.ui.slider.js"></script>
-	<script src="js/flarevideo/flarevideo.js"></script>
-
 	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
 	<script src="js/media.js"></script>
 	<script src="js/client.js"></script>

@@ -27,10 +27,8 @@
             if (isError) {
                 return;
             } else{
-                //var fileURL = URL.createObjectURL(file);
                 var fileURL = URL.createObjectURL(file);
                 playMedia(fileURL, type);
-
             }
         },
         inputNode = document.querySelector('input');
@@ -46,14 +44,5 @@
 }(window));
 
 function playMedia(url, type){
-    fv.load([
-    {
-      src:  url,
-      type: type
-    }
-    ]);
+    $("#player").html('<source src="' + url + '" type="' + type + '">');
 }
-
-jQuery(document).ready(function($) {
-    fv = $("#player").flareVideo();
-});

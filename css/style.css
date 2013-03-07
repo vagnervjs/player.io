@@ -2,12 +2,22 @@ body {
   background: #27282C url(../img/bg.png) repeat;
 }
 
-#player {
-	background: #000000;
-	-webkit-box-shadow: 0 0 20px #000;
-	-moz-box-shadow: 0 0 20px #000;
+.player-cont{
 	width: 800px;
 	height: 480px;
-	overflow: none;
 	margin: 5% auto;
+	-webkit-box-shadow: 0 0 35px #000;
+	-moz-box-shadow: 0 0 35px #000;
+}
+.player-cont video {
+	width: 800px;
+	height: 480px;
+	background: #000000;
+}
+
+#qr{
+	float: right;
+	margin: 60px 30px 0 0;
+	-webkit-box-shadow: 0 0 35px #696969;
+	-moz-box-shadow: 0 0 35px #696969;
 }
