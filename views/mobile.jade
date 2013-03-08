@@ -23,6 +23,14 @@ html
                 $('#prev').tap(function() {
                     $.get('/player/#{id}/prev', function() {});
                 });
+                $("#slider").on("change", function(){
+                        var value = $("#slider").val() / 100;
+                        $.get('/player/#{id}/vol/' + value, function() {});
+                });
+                $("#slider2").on("change", function(){
+                        var value = $("#slider2").val();
+                        $.get('/player/#{id}/seek/' + value, function() {});
+                });
             });
     body
             header
@@ -31,3 +39,7 @@ html
                 a(href="#", id="play", data-role="button", data-transition="fade", data-theme="a") Play
                 a(href="#", id="pause", data-role="button", data-transition="fade",  data-theme="a") Pause
                 a(href="#", id="fullscreen", data-role="button", data-transition="fade",  data-theme="a") Fullscreen
+                h3 Volume
+                input(type="range", name="slider", id="slider", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
+                h3 Time (%)
+                input(type="range", name="slider", id="slider2", value="50", min="0", max="100", data-theme="a", data-track-theme="b")

@@ -20,10 +20,11 @@ app.get('/mb/:id', function (req, res) {
     res.render('mobile.jade', {id:id, title:'Player.IO | Control'});
 });
 
-app.get('/player/:id/:action', function (req, res) {
+app.get('/player/:id/:action/:val?', function (req, res) {
     var id = req.params.id;
     var action = req.params.action;
-    sockets[id].emit('play', {action:action});
+    var val = req.params.val;
+    sockets[id].emit('play', {action:action, val:val});
     res.send('ok');
 });
 

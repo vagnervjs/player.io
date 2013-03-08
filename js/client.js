@@ -17,6 +17,13 @@ socket.on('play', function (data) {
         media.pause();
     } else if (data.action == 'fullscreen'){
         media.webkitRequestFullScreen();
+    } else if (data.action == 'vol'){
+        media.volume = data.val;
+    } else if (data.action == 'seek'){
+        var total = media.duration;
+        var newTime =  (total * data.val) / 100;
+        console.log("Total: " + total + " New: " + newTime);
+        media.currentTime = newTime;
     }
 });
 
