@@ -24,16 +24,12 @@ p{font-size: 14px;}
 .ft{color: #489ebf; font-weight: bold;}
 
 /* Player */
-.player-cont{
+video {
 	width: 800px;
 	height: 480px;
 	margin: 0 auto;
 	-webkit-box-shadow: 0 0 35px #000;
 	-moz-box-shadow: 0 0 35px #000;
-}
-.player-cont video {
-	width: 800px;
-	height: 480px;
 	background: #000000;
 }
 
@@ -102,6 +98,8 @@ footer{
 	margin-top: 20px;
 	padding: 20px 0 20px 0;
 }
+
+input{ width: 230px;}
 
 .clear {
     clear: both;

@@ -46,3 +46,11 @@
 function playMedia(url, type){
     $("#player").html('<source src="' + url + '" type="' + type + '">');
 }
+
+$("#add").on("click", function(){
+    var url = $("#mediaurl").val();
+
+    if (url != '' || url != null) {
+        $("#player").html('<source src="' + url + '">');
+    } else alert("Insert a URL for a file");
+});

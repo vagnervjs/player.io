@@ -15,6 +15,9 @@
 	    <aside class="left">
 	    	<h2>Files</h2>
 			<input type="file" name="file"/>
+			<p>Or, enter a media URL:</p>
+			<input type="text" id="mediaurl" value="http://198.211.102.14/media/video.mp4" placeholder="http://198.211.102.14/media/video.mp4">
+			<button id="add">Add</button>
 	    	<div id="message"></div>
 	    </aside>
 	    <aside class="right">
@@ -23,9 +26,7 @@
 			<div id="qr"></div>
 	    </aside>
 	    <div class="content">
-	    	<div class="player-cont ">
-	    		<video id="player" autobuffer controls></video>
-	    	</div>
+	    	<video id="player" autobuffer controls></video>
 	    </div>
 	    <div class="clear"></div>
 	    <footer>
