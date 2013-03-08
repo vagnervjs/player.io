@@ -1,3 +1,8 @@
+/*
+    Author: Vagner Santana;
+            vagnersantana.com
+*/
+
 var io = require('socket.io').listen(8080);
 
 var express = require("express");

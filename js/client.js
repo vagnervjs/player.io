@@ -1,12 +1,7 @@
-function randomId() {
-    var newId = "";
-    var abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 5; i++ )
-        newId += abc.charAt(Math.floor(Math.random() * abc.length));
-
-    return newId;
-}
+/*
+    Author: Vagner Santana;
+            vagnersantana.com
+*/
 
 var id = randomId();
 var socket = io.connect('http://localhost:8080');
@@ -26,3 +21,15 @@ socket.on('play', function (data) {
 });
 
 $("#qr").html('<a href="http://localhost:8000/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
+
+
+// Functions
+function randomId() {
+    var newId = "";
+    var abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        newId += abc.charAt(Math.floor(Math.random() * abc.length));
+
+    return newId;
+}

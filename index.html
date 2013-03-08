@@ -3,22 +3,34 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Player.IO</title>
-
-	<!-- CSS Files -->
 	<link rel="stylesheet" href="css/style.css">
-
+	<link href="http://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Play:700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<section>
-		<label for="file">
-			Choice a file: <input type="file" name="file"/>
-    	</label>
-    	<div id="message"></div>
-    	<div id="qr"></div>
-    	
-    	<div class="player-cont">
-    		<video id="player" autobuffer controls></video>
-    	</div>
+	<header>
+		<h1>Player.IO</h1>
+	</header>
+	<section class="container">
+	    <aside class="left">
+	    	<h2>Files</h2>
+			<input type="file" name="file"/>
+	    	<div id="message"></div>
+	    </aside>
+	    <aside class="right">
+	    	<h2>Control</h2>
+	    	<p>Read this QR Code on your <span class="ft">smartphone</span>, or just open the link address (click to view the link).</p>
+			<div id="qr"></div>
+	    </aside>
+	    <div class="content">
+	    	<div class="player-cont ">
+	    		<video id="player" autobuffer controls></video>
+	    	</div>
+	    </div>
+	    <div class="clear"></div>
+	    <footer>
+			<span>create by <a href="http://vagnersantana.com" target="_blank">Vagner Santana</a></span>
+	    </footer>
 	</section>
 
 	<!-- JS Files -->
