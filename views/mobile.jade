@@ -11,6 +11,8 @@ html
         script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
         script(type='text/javascript')
             $(document).bind('pageinit', function() {
+                $('.ui-body-c').css({background: 'url(http://198.211.102.14/player.io/img/bg.png) repeat'});
+                
                 $('#play').tap(function() {
                     $.get('/player/#{id}/play', function() {});
                 });
