@@ -4,14 +4,16 @@ html
         meta(charset="utf-8")
         meta(name="viewport", content="width=device-width, initial-scale=1")
         title #{title}
-        link(rel='stylesheet', href='http://vagnersantana.com/player.io/assets/css/style.css')
-
         link(rel='stylesheet', href='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
         script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
         script(src='http://vagnersantana.com:8080/socket.io/socket.io.js')
         script(type='text/javascript')
             $(document).bind('pageinit', function() {
+                // CSS Changes
+                $('.ui-body-c').css({background: 'url(http://vagnersantana.com/player.io/assets/img/bg.png) repeat'});
+
+                // Socket.io
                 var socket = io.connect('http://vagnersantana.com:8080');
                 var id = $('body').attr('id');
 
@@ -26,8 +28,7 @@ html
                     $('.playlist-mb ul').html(html);
                 });
 
-                $('.ui-body-c').css({background: 'url(http://vagnersantana.com/player.io/assets/img/bg.png) repeat'});
-                
+                //Events
                 $('#play').tap(function() {
                     $.get('/player/#{id}/play', function() {});
                 });
@@ -48,7 +49,6 @@ html
                     var value = $("#slider2").val();
                     $.get('/player/#{id}/seek/' + value, function() {});
                 });
-
                 $('.playlist-mb').on("tap", "a", function(){
                     var value = $(this).attr('data-fileid');
                     $('.playlist-mb a').removeClass('nowplay');
@@ -59,8 +59,36 @@ html
                 });
             });
         style
-            .ui-page{
-                padding: 20px;
+            header h1{
+                font-family: 'Play', sans-serif;
+                font-size: 64px;
+                color: #24c7c0;
+                text-align: center;
+                text-shadow:0px 0px 0 rgb(231,231,231),
+                            1px 1px 0 rgb(216,216,216),
+                            2px 2px 0 rgb(202,202,202),
+                            3px 3px 0 rgb(187,187,187),
+                            4px 4px 0 rgb(173,173,173),
+                            5px 5px 0 rgb(158,158,158), 
+                            6px 6px 0 rgb(144,144,144),
+                            7px 7px 6px rgba(0,0,0,0.6),
+                            7px 7px 1px rgba(0,0,0,0.5),
+                            0px 0px 6px rgba(0,0,0,.2);
+            }
+            h2{
+                font-size: 40px;
+                text-align: center;
+            }
+            section, .playlist-mb{
+                padding: 30px;
+            }
+            .nowplay{
+                background-image: -webkit-gradient(linear,left top,left bottom,from(#00b5b5),to(#36faee));
+                background-image: -webkit-linear-gradient(#00b5b5,#36faee);
+                background-image: -moz-linear-gradient(#00b5b5,#36faee);
+                background-image: -ms-linear-gradient(#00b5b5,#36faee);
+                background-image: -o-linear-gradient(#00b5b5,#36faee);
+                background-image: linear-gradient(#00b5b5,#36faee);
             }
     body(id="#{id}")
             header
