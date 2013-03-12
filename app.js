@@ -38,6 +38,8 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('setPlaylist', function (data) {
-        sockets[data[0].id].emit('newPlaylist', {pl:data[1].pl});
+        if(sockets[data[0].id] != undefined){
+            sockets[data[0].id].emit('newPlaylist', {pl:data[1].pl});
+        }
     });
 });

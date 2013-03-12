@@ -23,6 +23,8 @@ socket.on('play', function (data) {
         var total = media.duration;
         var newTime =  (total * data.val) / 100;
         media.currentTime = newTime;
+    } else if (data.action == 'change'){
+        getMedia(data.val);
     }
 });
 

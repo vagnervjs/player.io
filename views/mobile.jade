@@ -17,9 +17,13 @@ html
 
                 socket.emit('setId', id + 'mb');
                 socket.on('newPlaylist', function (data) {
+                    var html = '';
+                    $("#no").remove();
                     for(var i=0, t=data.pl.length; i<t; i++){
-                        $('.playlist').append(data.pl[i].file + "<br>");
+                        html = html + '<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a class="ui-link-inherit" data-fileid="' + data.pl[i].file + '">'+ data.pl[i].fileName + '</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>';
                     }
+
+                    $('.playlist ul').html(html);
                 });
 
                 $('.ui-body-c').css({background: 'url(http://198.211.102.14/player.io/img/bg.png) repeat'});
@@ -37,12 +41,17 @@ html
                     $.get('/player/#{id}/prev', function() {});
                 });
                 $("#slider").on("change", function(){
-                        var value = $("#slider").val() / 100;
-                        $.get('/player/#{id}/vol/' + value, function() {});
+                    var value = $("#slider").val() / 100;
+                    $.get('/player/#{id}/vol/' + value, function() {});
                 });
                 $("#slider2").on("change", function(){
-                        var value = $("#slider2").val();
-                        $.get('/player/#{id}/seek/' + value, function() {});
+                    var value = $("#slider2").val();
+                    $.get('/player/#{id}/seek/' + value, function() {});
+                });
+
+                $('.playlist').on("tap", "a", function(){
+                    var value = $(this).attr('data-fileid');
+                    $.get('/player/#{id}/change/' + value, function() {});
                 });
             });
     body(id="#{id}")
@@ -56,4 +65,9 @@ html
                 input(type="range", name="slider", id="slider", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
                 h3 Time (%)
                 input(type="range", name="slider", id="slider2", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
+            br
             .playlist
+                h2 Playlist
+                ul(data-role="listview", data-inset="true")
+                    li(id="no") 
+                        a(data-fileid="no") No files to play!

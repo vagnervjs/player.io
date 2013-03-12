@@ -34,7 +34,7 @@
                 } else {
                     var fileURL = URL.createObjectURL(file);
                     $('.no').remove();
-                    $('.playlist-ul').append('<li><a href=# data-file="' + fileURL + '" data-type="' + type + '">' + file.name + '</a></li>');
+                    $('.playlist-ul').append('<li><a href=# data-file="' + fileURL + '" data-type="' + type + '" data-fileid="' + randomId() + '" data-filename="' + file.name + '">' + file.name + '</a></li>');
                     getPlaylist();
                 }
             };
@@ -57,25 +57,14 @@ $("#add").on("click", function(){
 
     if (url != '') {
         $('.no').remove();
-        $('.playlist-ul').append('<li><a href=# data-file="' + url + '">' + url + '</a></li>');
+        $('.playlist-ul').append('<li><a href=# data-file="' + url + '" data-fileid="' + randomId() + '" data-filename="' + url + '">' + url + '</a></li>');
 
         getPlaylist();
     } else alert("Insert a URL for a file");
 });
 
 $('.playlist-ul').on("click", 'a', function(){
-    var file = $(this).attr("data-file");
-    var type = $(this).attr("data-type");
-    
-    $('.playlist-ul a').removeClass('nowplay');
-    
-    if (type != undefined) {
-        playMedia(file, type);
-    } else{
-        playMedia(file, '');
-    }
-
-    $(this).addClass('nowplay');
+    playMedia($(this));
 });
 
 function getPlaylist(){
@@ -84,19 +73,31 @@ function getPlaylist(){
         fl;
 
     $.each(pl, function(){
-        fl = $(this).attr('data-file');
-        json.push({file: fl});
+        fl = $(this).attr('data-fileid');
+        filename = $(this).attr('data-filename');
+        json.push({file: fl, fileName: filename});
     });
-
+    console.log(json);
     sendPlaylist(json);
 }
 
-function playMedia(url, type){
-    $("#player").html('<source src="' + url + '" type="' + type + '">');
+function getMedia(id){
+    var pl = $('.playlist-ul a');
+
+    $.each(pl, function(){
+        if($(this).attr('data-fileid') == id){
+            playMedia($(this));
+        }
+    })
 }
 
-$('#gofull').on("click", function(){
-    var media = document.getElementById("player");
-    media.webkitRequestFullScreen();
-    console.log(media);
-});
+function playMedia(obj){
+    $('.playlist-ul a').removeClass('nowplay');
+
+    if (obj.attr('type') != undefined) {
+        $("#player").html('<source src="' + obj.attr('data-file') + '" type="' + obj.attr('type') + '">');
+    } else{
+        $("#player").html('<source src="' + obj.attr('data-file') + '">');
+    }
+    obj.addClass("nowplay");
+}
