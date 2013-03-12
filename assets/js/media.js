@@ -38,6 +38,7 @@
                     getPlaylist();
                 }
             };
+            $('#fileinp').val('');
         },
         inputNode = document.querySelector('input');
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
