@@ -86,7 +86,7 @@ video {
 }
 
 .nowplay{
-	color: #25aba0;
+	color: #25aba0 !important;
 }
 
 #message{
