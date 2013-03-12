@@ -25,6 +25,8 @@ socket.on('play', function (data) {
         media.currentTime = newTime;
     } else if (data.action == 'change'){
         getMedia(data.val);
+    } else if (data.action == 'newplaylist'){
+        getPlaylist();
     }
 });
 

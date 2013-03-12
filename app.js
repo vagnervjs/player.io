@@ -18,6 +18,11 @@ app.get('/mb/:id', function (req, res) {
     var id = req.params.id;
     console.log(id);
     res.render('mobile.jade', {id:id, title:'Player.IO | Control'});
+
+    setTimeout(function(){
+        sockets[id].emit('play', {action:'newplaylist'});
+    }, 500)
+
 });
 
 app.get('/player/:id/:action/:val?', function (req, res) {

@@ -77,7 +77,7 @@ function getPlaylist(){
         filename = $(this).attr('data-filename');
         json.push({file: fl, fileName: filename});
     });
-    console.log(json);
+
     sendPlaylist(json);
 }
 
