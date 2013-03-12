@@ -22,13 +22,18 @@ socket.on('play', function (data) {
     } else if (data.action == 'seek'){
         var total = media.duration;
         var newTime =  (total * data.val) / 100;
-        console.log("Total: " + total + " New: " + newTime);
         media.currentTime = newTime;
     }
 });
 
-$("#qr").html('<a href="http://localhost:8000/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
+function sendPlaylist(playlist){
+    var data = [];
+    data.push({id: id + "mb"});
+    data.push({pl: playlist});
+    socket.emit('setPlaylist', data);
+}
 
+$("#qr").html('<a href="http://localhost:8000/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
 
 // Functions
 function randomId() {

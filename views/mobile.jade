@@ -9,8 +9,19 @@ html
         link(rel='stylesheet', href='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
         script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
+        script(src='http://localhost:8080/socket.io/socket.io.js')
         script(type='text/javascript')
             $(document).bind('pageinit', function() {
+                var socket = io.connect('http://localhost:8080');
+                var id = $('body').attr('id');
+
+                socket.emit('setId', id + 'mb');
+                socket.on('newPlaylist', function (data) {
+                    for(var i=0, t=data.pl.length; i<t; i++){
+                        $('.playlist').append(data.pl[i].file + "<br>");
+                    }
+                });
+
                 $('.ui-body-c').css({background: 'url(http://198.211.102.14/player.io/img/bg.png) repeat'});
                 
                 $('#play').tap(function() {
@@ -34,7 +45,7 @@ html
                         $.get('/player/#{id}/seek/' + value, function() {});
                 });
             });
-    body
+    body(id="#{id}")
             header
                 h1 Player.IO
             section
@@ -45,3 +56,4 @@ html
                 input(type="range", name="slider", id="slider", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
                 h3 Time (%)
                 input(type="range", name="slider", id="slider2", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
+            .playlist

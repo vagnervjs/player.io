@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Player.IO</title>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 	<link href="http://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Play:700' rel='stylesheet' type='text/css'>
 </head>
@@ -15,11 +15,18 @@
 	<section class="container">
 	    <aside class="left">
 	    	<h2>Files</h2>
-			<input type="file" name="file"/>
+			<input type="file" name="file" multiple/>
 			<p>Or, enter a media URL:</p>
-			<input type="text" id="mediaurl" value="http://198.211.102.14/media/video.mp4" placeholder="http://198.211.102.14/media/video.mp4">
+			<input type="text" id="mediaurl" value="http://vagnersantana.com/player.io/media/video.mp4" placeholder="http://vagnersantana.com/player.io/media/video.mp4">
 			<button id="add">Add</button>
 	    	<div id="message"></div>
+	    	<div class="playlist">
+	    		<h3>Playlist</h3>
+	    		<hr>
+	    		<ul class="playlist-ul">
+	    			<li class="file no">No files to play!</li>
+	    		</ul>
+	    	</div>
 	    </aside>
 	    <aside class="right">
 	    	<h2>Control</h2>
@@ -38,7 +45,7 @@
 	<!-- JS Files -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
-	<script src="js/media.js"></script>
-	<script src="js/client.js"></script>
+	<script src="assets/js/media.js"></script>
+	<script src="assets/js/client.js"></script>
 </body>
 </html>

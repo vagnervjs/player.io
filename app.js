@@ -33,6 +33,11 @@ app.listen(8000);
 var sockets = {};
 io.sockets.on('connection', function (socket) {
     socket.on('setId', function (id) {
+        console.log("THE ID: " + id);
         sockets[id] = socket;
+    });
+
+    socket.on('setPlaylist', function (data) {
+        sockets[data[0].id].emit('newPlaylist', {pl:data[1].pl});
     });
 });

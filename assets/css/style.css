@@ -57,10 +57,49 @@ video {
 .right {
     width: 160px;
     height: 500px;
+    margin-right: 20px;
     overflow: hidden;
 	float: right;
 }
 
+.playlist{
+	width: 200px;
+	height: 320px;
+	padding: 10px;
+	background: #e4e4e4;
+	overflow-x: hidden;
+	overflow-y: auto;	
+	-webkit-box-shadow: 0px 2px 3px #555;
+	-moz-box-shadow: 0px 2px 3px #555;
+	box-shadow: 0px 2px 3px #555;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.playlist ul{
+	list-style: square;
+}
+
+.playlist hr{
+	margin: 10px 0 10px 0;
+}
+
+.nowplay{
+	color: #25aba0;
+}
+
+#message{
+	color: red;
+}
+
+ul{
+	-webkit-padding-start: 15px !important;
+	-moz-padding-start: 15px !important;
+	-ms-padding-start: 15px !important;
+	-o-padding-start: 15px !important;
+	padding-start: 15px !important;
+}
 aside p, input, div{
 	padding-bottom: 10px; 
 }
@@ -99,7 +138,7 @@ footer{
 	padding: 20px 0 20px 0;
 }
 
-input{ width: 230px;}
+input{ width: 200px;}
 
 .clear {
     clear: both;
