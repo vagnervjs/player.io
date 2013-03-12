@@ -4,15 +4,15 @@ html
         meta(charset="utf-8")
         meta(name="viewport", content="width=device-width, initial-scale=1")
         title #{title}
-        link(rel='stylesheet', href='http://198.211.102.14/player.io/css/style.css')
+        link(rel='stylesheet', href='http://vagnersantana.com/player.io/assets/css/style.css')
 
         link(rel='stylesheet', href='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
         script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
-        script(src='http://localhost:8080/socket.io/socket.io.js')
+        script(src='http://vagnersantana.com:8080/socket.io/socket.io.js')
         script(type='text/javascript')
             $(document).bind('pageinit', function() {
-                var socket = io.connect('http://localhost:8080');
+                var socket = io.connect('http://vagnersantana.com:8080');
                 var id = $('body').attr('id');
 
                 socket.emit('setId', id + 'mb');
@@ -23,7 +23,7 @@ html
                         html = html + '<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a class="ui-link-inherit" data-fileid="' + data.pl[i].file + '">'+ data.pl[i].fileName + '</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>';
                     }
 
-                    $('.playlist ul').html(html);
+                    $('.playlist-mb ul').html(html);
                 });
 
                 $('.ui-body-c').css({background: 'url(http://198.211.102.14/player.io/img/bg.png) repeat'});
@@ -49,9 +49,9 @@ html
                     $.get('/player/#{id}/seek/' + value, function() {});
                 });
 
-                $('.playlist').on("tap", "a", function(){
+                $('.playlist-mb').on("tap", "a", function(){
                     var value = $(this).attr('data-fileid');
-                    $('.playlist a').removeClass('nowplay');
+                    $('.playlist-mb a').removeClass('nowplay');
 
                     $.get('/player/#{id}/change/' + value, function() {});
 
@@ -70,7 +70,7 @@ html
                 h3 Time (%)
                 input(type="range", name="slider", id="slider2", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
             br
-            .playlist
+            .playlist-mb
                 h2 Playlist
                 ul(data-role="listview", data-inset="true")
                     li(id="no") 

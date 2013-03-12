@@ -21,7 +21,7 @@ app.get('/mb/:id', function (req, res) {
 
     setTimeout(function(){
         sockets[id].emit('play', {action:'newplaylist'});
-    }, 500)
+    }, 4000)
 
 });
 
