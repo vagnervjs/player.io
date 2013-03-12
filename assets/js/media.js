@@ -79,7 +79,9 @@ function getPlaylist(){
         json.push({file: fl, fileName: filename});
     });
 
-    sendPlaylist(json);
+    if (json.length){
+        sendPlaylist(json);
+    }
 }
 
 function getMedia(id){

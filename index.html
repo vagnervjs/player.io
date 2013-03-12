@@ -17,7 +17,7 @@
 	    	<h2>Files</h2>
 			<input type="file" name="file" id="fileinp" multiple/>
 			<p>Or, enter a media URL:</p>
-			<input type="text" id="mediaurl" value="http://vagnersantana.com/player.io/media/video.mp4" placeholder="http://vagnersantana.com/player.io/media/video.mp4">
+			<input type="text" id="mediaurl" value="http://vagnersantana.com/video.mp4" placeholder="http://vagnersantana.com/player.io/media/video.mp4">
 			<button id="add">Add</button>
 	    	<div id="message"></div>
 	    	<div class="playlist">
@@ -34,7 +34,7 @@
 			<div id="qr"></div>
 	    </aside>
 	    <div class="content">
-	    	<video id="player" autobuffer controls></video>
+	    	<video id="player" autobuffer autoplay controls></video>
 	    </div>
 	    <div class="clear"></div>
 	    <footer>
@@ -44,7 +44,7 @@
 
 	<!-- JS Files -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="http://vagnersantana.com:8080/socket.io/socket.io.js"></script>
+	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
 	<script src="assets/js/media.js"></script>
 	<script src="assets/js/client.js"></script>
 </body>

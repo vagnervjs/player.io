@@ -20,8 +20,8 @@ app.get('/mb/:id', function (req, res) {
     res.render('mobile.jade', {id:id, title:'Player.IO | Control'});
 
     setTimeout(function(){
-        sockets[id].emit('play', {action:'newplaylist'});
-    }, 4000)
+        sockets[id].emit('play', {action:'playlist'});
+    }, 3000)
 
 });
 
