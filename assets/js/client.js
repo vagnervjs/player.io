@@ -16,7 +16,7 @@ socket.on('play', function (data) {
     } else if (data.action == 'pause'){
         media.pause();
     } else if (data.action == 'fullscreen'){
-        media.webkitRequestFullScreen();
+        //
     } else if (data.action == 'vol'){
         media.volume = data.val;
     } else if (data.action == 'seek'){

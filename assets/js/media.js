@@ -102,5 +102,9 @@ function playMedia(obj){
     } else{
         $("#player").html('<source src="' + obj.attr('data-file') + '">');
     }
+    
+    var media = document.getElementById("player");
+    media.play();
+    
     obj.addClass("nowplay");
 }
