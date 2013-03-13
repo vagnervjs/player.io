@@ -9,6 +9,7 @@ var media = document.getElementById("player");
 
 socket.emit('setId', id);
 socket.on('play', function (data) {
+    var pl = $('.playlist-ul a');
     console.log(data);
     
     if (data.action == 'play') {
@@ -17,8 +18,30 @@ socket.on('play', function (data) {
         media.pause();
     } else if (data.action == 'fullscreen'){
         fullScreenToggle();
-    } else if (data.action == 'vol'){
-        media.volume = data.val;
+    } else if (data.action == 'volup'){
+        media.volume+=0.1;
+    } else if (data.action == 'voldown'){
+        media.volume-=0.1;
+    } else if (data.action == 'prev'){
+        var filePrev;
+        $.each(pl, function(){
+            if($(this).hasClass('nowplay')){
+                if ($(this).parent().prev() != undefined) {
+                    filePrev = $(this).parent().prev().children().attr('data-fileid');
+                }
+            }
+        });
+        getMedia(filePrev);
+    } else if (data.action == 'next'){
+        var fileNext;
+        $.each(pl, function(){
+            if($(this).hasClass('nowplay')){
+                if ($(this).parent().next() != undefined) {
+                    fileNext = $(this).parent().next().children().attr('data-fileid');
+                }
+            }
+        });
+        getMedia(fileNext);
     } else if (data.action == 'seek'){
         var total = media.duration;
         var newTime =  (total * data.val) / 100;
