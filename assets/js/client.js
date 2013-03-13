@@ -16,7 +16,7 @@ socket.on('play', function (data) {
     } else if (data.action == 'pause'){
         media.pause();
     } else if (data.action == 'fullscreen'){
-        //
+        fullScreenToggle();
     } else if (data.action == 'vol'){
         media.volume = data.val;
     } else if (data.action == 'seek'){
@@ -39,7 +39,7 @@ function sendPlaylist(playlist){
 
 $("#qr").html('<a href="http://localhost:8000/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
 
-// Functions
+// Helper Functions
 function randomId() {
     var newId = "";
     var abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

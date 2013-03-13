@@ -108,3 +108,22 @@ function playMedia(obj){
     
     obj.addClass("nowplay");
 }
+
+function fullScreenToggle(){
+    var docWidth = $(window).width(),
+        docHeight = $(window).height();
+    
+    if (! $('video').hasClass('fullScreen')) {
+        $('video').addClass('fullScreen');
+        $('video').css({
+           width :  docWidth,
+           height : docHeight
+        });
+    } else {
+        $('video').removeClass('fullScreen');
+        $('video').css({
+           width :  '800px',
+           height : '480px'
+        });
+    }
+}

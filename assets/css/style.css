@@ -33,6 +33,12 @@ video {
 	background: #000000;
 }
 
+.fullScreen{
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
 /* Layout */
 .container {
 	min-width: 1265px;
