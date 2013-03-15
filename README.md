@@ -1,8 +1,9 @@
 ##Player.IO
 
-[http://vagnersantana.com/player.io](http://vagnersantana.com/player.io)
+A real-time media player thats run on your browser and you controls in your smartphone.
 
-A real-time media center thats run on your browser and you controls in your smartphone.
+- Project: [http://vagnersantana.com/player.io](http://vagnersantana.com/player.io)
+- Post about the project: [http://openblog.github.com/2013/03/15/player.io](http://openblog.github.com/2013/03/15/player.io)
  
 Made using just **JavaScript**.
 
@@ -10,8 +11,10 @@ Made using just **JavaScript**.
 
 - Node.js
 - Socket.io
+- Express
 - File Access API
 - HTML5 Audio and Video
+- Blobs URLs
 - jQuery Mobile 
 - Jade Template Engine
 
