@@ -23,19 +23,10 @@ Made using just **JavaScript**.
  
 If you want run application in localhost, follow the instructions below:
 
-Install Git and NodeJS, if you don't have them already.
+Install Git and Node.JS, if you don't have them already.
 
-- Instal socket.io and express.js
+After Git and Node.JS installed:
 
-```bash
-$ sudo npm install socket.io express
-```
-
-- Instal Jade
-
-```bash
-$ sudo npm install jade
-```
 
 - Clone the repository
 
@@ -49,6 +40,12 @@ $ git clone git@github.com:<your-github-username>/player.io.git
 $ cd player.io
 ```
 
+- Instal dependences
+
+```bash
+$ sudo npm install
+```
+
 - Run app.js
 
 ```bash
@@ -57,7 +54,7 @@ $ node app.js
 
 ---
 
-If everything is ok, and the NodeJS is running, you can open the index.html in your browser.
+If everything is ok, and the Node.JS is running, you can open the index.html in your browser.
 
 
 Obs.: To test the Player.IO on your smartphone you need a online server.
