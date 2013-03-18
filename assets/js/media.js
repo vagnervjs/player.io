@@ -1,13 +1,5 @@
 (function localFileVideoPlayerInit(win) {
     var URL = win.URL || win.webkitURL,
-        displayMessage = (function displayMessageInit() {
-            var node = document.querySelector('#message');
-
-            return function displayMessage(message, isError) {
-                node.innerHTML = message;
-                node.className = isError ? 'error' : 'info';
-            };
-        }()),
         playSelectedFile = function playSelectedFileInit(event) {
             var arrFile = this.files[0];
             var size = (this.files.length);
@@ -22,6 +14,7 @@
                 var message = '';
 
                 if (canPlay == 'no') {
+                    if(!type) type = file.name.slice(file.name.lastIndexOf('.') + 1);
                     message = 'Unable to play file type: "' + type + '"';
                     displayMessage(message, isError);
                 } else {
@@ -34,7 +27,7 @@
                 } else {
                     var fileURL = URL.createObjectURL(file);
                     $('.no').remove();
-                    $('.playlist-ul').append('<li><a href=# data-file="' + fileURL + '" data-type="' + type + '" data-fileid="' + randomId() + '" data-filename="' + file.name + '">' + file.name + '</a></li>');
+                    addToPlayList(fileURL, file.name)
                     getPlaylist();
                 }
             };
@@ -58,15 +51,25 @@ $("#add").on("click", function(){
 
     if (url != '') {
         $('.no').remove();
-        $('.playlist-ul').append('<li><a href=# data-file="' + url + '" data-fileid="' + randomId() + '" data-filename="' + url + '">' + url + '</a></li>');
-
+        addToPlayList(url)
         getPlaylist();
     } else alert("Insert a URL for a file");
 });
 
-$('.playlist-ul').on("click", 'a', function(){
+$('.playlist-ul').on("click", 'li', function(){
     playMedia($(this));
 });
+
+function addToPlayList(url, name){
+    if(!name) var name = url.slice(url.lastIndexOf('/') + 1);
+    var type = url.type ? 'data-type="' + url.type + '" ' : '';
+    $('.playlist-ul').append('<li data-file="' + url + '" data-fileid="' + randomId() + '" data-filename="' + url + '" class="playlist-li" '+ type +'>' + name + '</li>');
+}
+
+function displayMessage(message, isError) {
+    $("#message").html(message);
+    $("#message").get(0).className = isError ? 'error' : 'info';
+};
 
 function getPlaylist(){
     var pl = $('.playlist-ul a'),
@@ -97,16 +100,21 @@ function getMedia(id){
 function playMedia(obj){
     $('.playlist-ul a').removeClass('nowplay');
 
-    if (obj.attr('type') != undefined) {
-        $("#player").html('<source src="' + obj.attr('data-file') + '" type="' + obj.attr('type') + '">');
-    } else{
-        $("#player").html('<source src="' + obj.attr('data-file') + '">');
-    }
+    $("#player").attr({'src': obj.attr('data-file')});
     
-    var media = document.getElementById("player");
-    media.play();
+    $("#player").get(0).play();
     
     obj.addClass("nowplay");
+
+    setTimeout(checkVideoDuration, 100)
+}
+
+function checkVideoDuration(){
+    var d = $("#player").get(0).duration;
+    if(d <= 0 || isNaN(d)) {
+        message = 'Unable to play this file.'
+        displayMessage(message, 'error');
+    }
 }
 
 function fullScreenToggle(){

@@ -87,6 +87,10 @@ video {
 	list-style: square;
 }
 
+.playlist-li{
+	cursor: pointer;
+}
+
 .playlist hr{
 	margin: 10px 0 10px 0;
 }
