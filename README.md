@@ -52,9 +52,13 @@ $ sudo npm install
 $ node app.js
 ```
 
----
+- Open on your browser
 
-If everything is ok, and the Node.JS is running, you can open the index.html in your browser.
+```bash
+localhost:8080
+```
+
+---
 
 
 Obs.: To test the Player.IO on your smartphone you need a online server.
