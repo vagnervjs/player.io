@@ -105,7 +105,8 @@ function playMedia(obj){
     $("#player").get(0).play();
     
     obj.addClass("nowplay");
-
+    displayMessage("");
+    
     setTimeout(checkVideoDuration, 100)
 }
 
