@@ -9,7 +9,7 @@ var media = document.getElementById("player");
 
 socket.emit('setId', id);
 socket.on('play', function (data) {
-    var pl = $('.playlist-ul a');
+    var pl = $('.playlist-ul li');
     console.log(data);
     
     if (data.action == 'play') {
@@ -26,8 +26,8 @@ socket.on('play', function (data) {
         var filePrev;
         $.each(pl, function(){
             if($(this).hasClass('nowplay')){
-                if ($(this).parent().prev() != undefined) {
-                    filePrev = $(this).parent().prev().children().attr('data-fileid');
+                if ($(this).prev() != undefined) {
+                    filePrev = $(this).prev().attr('data-fileid');
                 }
             }
         });
@@ -36,8 +36,8 @@ socket.on('play', function (data) {
         var fileNext;
         $.each(pl, function(){
             if($(this).hasClass('nowplay')){
-                if ($(this).parent().next() != undefined) {
-                    fileNext = $(this).parent().next().children().attr('data-fileid');
+                if ($(this).next() != undefined) {
+                    fileNext = $(this).next().attr('data-fileid');
                 }
             }
         });
