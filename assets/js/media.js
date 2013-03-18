@@ -1,6 +1,6 @@
 (function localFileVideoPlayerInit(win) {
     var URL = win.URL || win.webkitURL,
-        playSelectedFile = function playSelectedFileInit(event) {
+        manipulateFile = function manipulateFileInit(event) {
             var arrFile = this.files[0];
             var size = (this.files.length);
 
@@ -42,7 +42,7 @@
         return;
     }                
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-    inputNode.addEventListener('change', playSelectedFile, false);
+    inputNode.addEventListener('change', manipulateFile, false);
 }(window));
 
 $("#add").on("click", function(){
@@ -63,7 +63,7 @@ $('.playlist-ul').on("click", 'li', function(){
 function addToPlayList(url, name){
     if(!name) var name = url.slice(url.lastIndexOf('/') + 1);
     var type = url.type ? 'data-type="' + url.type + '" ' : '';
-    $('.playlist-ul').append('<li data-file="' + url + '" data-fileid="' + randomId() + '" data-filename="' + url + '" class="playlist-li" '+ type +'>' + name + '</li>');
+    $('.playlist-ul').append('<li data-file="' + url + '" data-fileid="' + randomId() + '" data-filename="' + name + '" class="playlist-li" '+ type +'>' + name + '</li>');
 }
 
 function displayMessage(message, isError) {
@@ -72,7 +72,7 @@ function displayMessage(message, isError) {
 };
 
 function getPlaylist(){
-    var pl = $('.playlist-ul a'),
+    var pl = $('.playlist-ul li'),
         json = [],
         fl;
 
@@ -88,7 +88,7 @@ function getPlaylist(){
 }
 
 function getMedia(id){
-    var pl = $('.playlist-ul a');
+    var pl = $('.playlist-ul li');
 
     $.each(pl, function(){
         if($(this).attr('data-fileid') == id){
@@ -98,7 +98,7 @@ function getMedia(id){
 }
 
 function playMedia(obj){
-    $('.playlist-ul a').removeClass('nowplay');
+    $('.playlist-ul li').removeClass('nowplay');
 
     $("#player").attr({'src': obj.attr('data-file')});
     
