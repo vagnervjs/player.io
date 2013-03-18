@@ -60,7 +60,7 @@ function sendPlaylist(playlist){
     socket.emit('setPlaylist', data);
 }
 
-$("#qr").html('<a href="http://localhost:8000/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
+$("#qr").html('<a href="/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
 
 // Helper Functions
 function randomId() {

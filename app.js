@@ -3,16 +3,19 @@
             vagnersantana.com
 */
 
-var io = require('socket.io').listen(8080);
-
 var express = require("express");
+
 var app = express();
+
+var server = require('http').createServer(app);
 
 app.set('view engine', 'jade');
 
 app.set('view options', {
     layout:false
 });
+
+app.use(express.static(__dirname));
 
 app.get('/mb/:id', function (req, res) {
     var id = req.params.id;
@@ -32,9 +35,12 @@ app.get('/player/:id/:action/:val?', function (req, res) {
     res.send('ok');
 });
 
-app.listen(8000);
+var socket = require('socket.io');
+
+var io = socket.listen(server);
 
 var sockets = {};
+
 io.sockets.on('connection', function (socket) {
     socket.on('setId', function (id) {
         console.log("THE ID: " + id);
@@ -47,3 +53,5 @@ io.sockets.on('connection', function (socket) {
         }
     });
 });
+
+server.listen(8080);

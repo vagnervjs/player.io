@@ -25,7 +25,7 @@
 	    		<h3>Playlist</h3>
 	    		<hr>
 	    		<ul class="playlist-ul">
-	    			<li class="file no">No files to play!</li>
+	    			<span class="file no">No files to play!</span>
 	    		</ul>
 	    	</div>
 	    </aside>
@@ -45,7 +45,12 @@
 
 	<!-- JS Files -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	if (typeof jQuery == 'undefined'){
+	    document.write(unescape("%3Cscript src='assets/js/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+	}
+	</script>
+	<script src="assets/js/socket.io.js"></script>
 	<script src="assets/js/media.js"></script>
 	<script src="assets/js/client.js"></script>
 </body>
