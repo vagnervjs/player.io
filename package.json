@@ -6,10 +6,19 @@
   "keywords": [
     "node.js, socket.io, javascript, media, player, html5"
   ],
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
   "dependencies": {
     "express": "3.x",
     "socket.io": "0.9.x", 
-    "jade" : "0.28.x"
+    "jade" : "0.28.x",
+    "grunt-cli": "0.1.6",
+    "grunt": "~0.4.0",
+    "grunt-yui-compressor": "0.2.1",
+    "grunt-htmlcompressor": "~0.1.8",
+    "grunt-rsync": "~0.1.0"
   },
   "author": "Vagner Santana"
 }

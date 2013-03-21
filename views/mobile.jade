@@ -8,14 +8,14 @@ html
         link(rel='stylesheet', href='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
         script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
-        script(src='http://localhost:8080/socket.io/socket.io.js')
+        script(src='http://vagnersantana.com:8080/socket.io/socket.io.js')
         script(type='text/javascript')
             $(document).bind('pageinit', function() {
                 // CSS Changes
                 $('.ui-body-c').css({background: 'url(http://vagnersantana.com/player.io/assets/img/bg.png) repeat'});
 
                 // Socket.io
-                var socket = io.connect('http://localhost:8080');
+                var socket = io.connect('http://vagnersantana.com:8080');
                 var id = $('body').attr('id');
 
                 socket.emit('setId', id + 'mb');
