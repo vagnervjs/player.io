@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 			},
 			deploy: {
 				src: './dist/',
-				dest: '/var/www/vagnersantana.com/player.io',
+				dest: '/var/www/player.io',
 				host: 'root@vagnersantana.com',
 				recursive: true,
 				syncDest: true
