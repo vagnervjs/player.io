@@ -45,6 +45,10 @@
     inputNode.addEventListener('change', manipulateFile, false);
 }(window));
 
+$("#open").on("click", function(){
+    $("#fileinp").click();
+});
+
 $("#add").on("click", function(){
     var url = $("#mediaurl").val();
     $("#mediaurl").val(null);
