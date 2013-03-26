@@ -11,7 +11,7 @@
 	      content="Player.io is a media center thats run on your browser. Made with node.js, socket.io and File Access API, that is, just javascript! By Vagner Santana"/>
 	<meta name="description" content="Player.io is a media center thats run on your browser. Made with node.js, socket.io and File Access API, that is, just javascript! By Vagner Santana">
 	<meta name="keywords" content="player.io, node.js, socket.io, websocket, vagner santana, html5, javascript">
-
+	<meta name="google-translate-customization" content="dbc4517b25696e6d-310dde8079d2815c-gec2e12fa0709c073-19"></meta>
 	<title>Player.IO</title>
 	<link href="assets/img/favicon.ico" rel="shortcut icon">
 	<link rel="stylesheet" href="assets/css/all.min.css">
@@ -21,21 +21,18 @@
 <body>
 	<a href="https://github.com/vagnervjs/player.io" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 	<header>
-		<h1>Player.IO</h1>
+		<h1><a href="http://vagnersantana.com/player.io/">Player.IO</a></h1>
 	</header>
 	<section class="container">
 	    <aside class="left">
-	    	<h2>Files</h2>
-			<input type="file" name="file" id="fileinp" multiple/>
-			<p>Or, enter a media URL:</p>
+	    <h2>Playlist</h2>
+			<p><button id="open">Open</button> a local video or<input style="display: none" type="file" name="file" id="fileinp" multiple/></p>
+			<p><button id="add">Add</button> a media URL:</p>
 			<input type="text" id="mediaurl" value="http://vagnersantana.com/video.mp4" placeholder="http://vagnersantana.com/player.io/media/video.mp4">
-			<button id="add">Add</button>
 	    	<div id="message"></div>
 	    	<div class="playlist">
-	    		<h3>Playlist</h3>
-	    		<hr>
 	    		<ul class="playlist-ul">
-	    			<span class="file no">No files to play!</span>
+	    			<span id="no_file">No files to play!</span>
 	    		</ul>
 	    	</div>
 	    </aside>
@@ -45,21 +42,20 @@
 			<div id="qr"></div>
 	    </aside>
 	    <div class="content">
+	    	<div id="audio_only"></div>
 	    	<video id="player" autobuffer autoplay controls></video>
 	    </div>
 	    <div class="clear"></div>
 	    <footer>
+	    <div id="google_translate_element"></div>
+		    <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');}</script>
+		    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 			<span>made by <a href="http://vagnersantana.com" target="_blank">Vagner Santana</a></span>
 	    </footer>
 	</section>
 
 	<!-- JS Files -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript">
-	if (typeof jQuery == 'undefined'){
-	    document.write(unescape("%3Cscript src='assets/js/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
-	}
-	</script>
+	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/socket.io.js"></script>
 	<script src="assets/js/all.min.js"></script>
 
