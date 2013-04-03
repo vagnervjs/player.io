@@ -3,64 +3,97 @@
             vagnersantana.com
 */
 
-var id = randomId();
-var socket = io.connect('http://localhost:8080');
-var media = document.getElementById("player");
+var socket = io.connect(location.origin);
 
+var media = $("#player").get(0);
+var pl = $('.playlist-ul li');
+
+var id = randomId();
 socket.emit('setId', id);
-socket.on('play', function (data) {
-    var pl = $('.playlist-ul li');
-    console.log(data);
-    
-    if (data.action == 'play') {
-        media.play();
-    } else if (data.action == 'pause'){
-        media.pause();
-    } else if (data.action == 'fullscreen'){
-        fullScreenToggle();
-    } else if (data.action == 'volup'){
-        media.volume+=0.1;
-    } else if (data.action == 'voldown'){
-        media.volume-=0.1;
-    } else if (data.action == 'prev'){
-        var filePrev;
-        $.each(pl, function(){
-            if($(this).hasClass('nowplay')){
-                if ($(this).prev() != undefined) {
-                    filePrev = $(this).prev().attr('data-fileid');
+
+socket.on('control', function (data) { 
+    switch(data.action) {
+        case 'play':
+            media.play();
+            break;
+        case 'playfile':
+            playerIO.playFile(data);
+            break;
+        case 'pause':
+            media.pause();
+            break;
+        case 'fullscreen':
+            fullScreenToggle();
+            break;
+        case 'volup':
+            media.volume += 0.1;
+            break;
+        case 'voldown':
+            media.volume -= 0.1;
+            break;
+        case 'prev':
+            var filePrev;
+            $.each(pl, function(){
+                if($(this).hasClass('nowplay')){
+                    if ($(this).prev() != undefined) {
+                        filePrev = $(this).prev().attr('data-fileid');
+                    }
                 }
-            }
-        });
-        getMedia(filePrev);
-    } else if (data.action == 'next'){
-        var fileNext;
-        $.each(pl, function(){
-            if($(this).hasClass('nowplay')){
-                if ($(this).next() != undefined) {
-                    fileNext = $(this).next().attr('data-fileid');
+            });
+            getMedia(filePrev);
+            break;
+        case 'next':
+            var fileNext;
+            $.each(pl, function(){
+                if($(this).hasClass('nowplay')){
+                    if ($(this).next() != undefined) {
+                        fileNext = $(this).next().attr('data-fileid');
+                    }
                 }
-            }
-        });
-        getMedia(fileNext);
-    } else if (data.action == 'seek'){
-        var total = media.duration;
-        var newTime =  (total * data.val) / 100;
-        media.currentTime = newTime;
-    } else if (data.action == 'change'){
-        getMedia(data.val);
-    } else if (data.action == 'playlist'){
-        getPlaylist();
+            });
+            getMedia(fileNext);
+            break;
+        case 'seek':
+            var total = media.duration;
+            var newTime =  (total * data.val) / 100;
+            media.currentTime = newTime;
+            break;
+        case 'change':
+            playerIO.getMedia(data.val);
+            break;
+        case 'playlist':
+            updatePlaylist();
+            break;
     }
 });
 
-function sendPlaylist(playlist){
-    var data = [];
-    data.push({id: id + "mb"});
-    data.push({pl: playlist});
-    socket.emit('setPlaylist', data);
+//Draw QR Code
+$("#qr").html('<a href="/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /><p>mb/' + id + '</p></a>');
+
+function updatePlaylist(){
+    var pl = $('.playlist-ul li'),
+        list = [],
+        fl, fn;
+
+    $.each(pl, function(){
+        fl = $(this).attr('data-fileid');
+        fn = $(this).attr('data-filename');
+        list.push({file: fl, fileName: fn});
+    });
+
+    if (list.length){
+        sendPlaylist(list);
+    }
 }
 
-$("#qr").html('<a href="/mb/' + id + '" target="_blank"><img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost:8000/mb/' + id + '&choe=UTF-8" alt="QR Code" /></a>');
+function sendPlaylist(list){
+    var data = [];
+    data = {
+        id: id,
+        playlist: list
+    };
+    socket.emit('setPlaylist', data);
+}
 
 // Helper Functions
 function randomId() {

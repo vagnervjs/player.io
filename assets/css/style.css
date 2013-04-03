@@ -45,10 +45,10 @@ video {
 }
 
 /* Layout */
-.container {
+body, .container{
 	min-width: 1265px;
-    max-width: 1380px;
-    margin: 0 auto;
+  max-width: 1380px;
+  margin: 0 auto;
 }
 
 .content {

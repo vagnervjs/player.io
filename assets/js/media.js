@@ -29,8 +29,7 @@ LocalFileVideoPlayer = function(m){
             localContext.displayMessage(messages['URL'], 'error');
         } else {
             $('#no_file').hide();
-            localContext.addToPlayList(url)
-            localContext.getPlaylist();
+            localContext.addToPlayList(url);
             $("#mediaurl").val(null);
         }
     });
@@ -46,33 +45,13 @@ LocalFileVideoPlayer.prototype.addToPlayList = function(url, name){
     });
 
     $('.playlist-ul').append(li);
+    updatePlaylist();
 }
 
 LocalFileVideoPlayer.prototype.displayMessage = function(message, isError) {
     $("#message").html(message);
     $("#message").get(0).className = isError ? 'error' : 'info';
 };
-
-LocalFileVideoPlayer.prototype.getPlaylist = function(){
-    var pl = $('.playlist-ul li'),
-        json = [],
-        fl;
-
-    $.each(pl, function(){
-        fl = $(this).attr('data-fileid');
-        filename = $(this).attr('data-filename');
-        json.push({file: fl, fileName: filename});
-    });
-
-    if (json.length){
-        this.sendPlaylist(json);
-    }
-}
-
-
-LocalFileVideoPlayer.prototype.sendPlaylist = function(list){
-    console.log('TODO: Send this by socket to the server', list);
-}
 
 LocalFileVideoPlayer.prototype.getMedia = function(id){
     var pl = $('.playlist-ul li');
@@ -122,9 +101,7 @@ LocalFileVideoPlayer.prototype.checkFileType = function(file){
         this.displayMessage('');
         var fileURL = URL.createObjectURL(file);
         $('#no_file').remove();
-        this.addToPlayList(fileURL, file.name)
-        this.getPlaylist();
-
+        this.addToPlayList(fileURL, file.name);
     } else {
         this.displayMessage(this.messages['Type'] + file.type , 'error');
     }
@@ -163,75 +140,6 @@ LocalFileVideoPlayer.prototype.fullScreenToggle = function(){
         });
     }
 };
-
-var HTML5AudioSpectre = function(){
-    var audio = $('#player').get(0), count, data, offset, spectre;
-
-    //RESET  
-    $('#spectre').remove()   
-
-    var loop = function(){
-        //UPDATE AUDIO DATA
-        audio.analyser.getByteFrequencyData(audio.frequencyData) 
-
-        for (var i = 0; i < count; ++i) {
-            var h = (audio.frequencyData[i * offset] / 256)
-            spectre.children[i].style.height = h * 428 + 'px'
-        }
-
-        HTML5AudioSpectre.timer = setTimeout(loop, 30)
-    }
-
-    var setupContext = function(){
-        if(!audio.context) {
-            //CREATE CONTEXT ANALYSER AND SOURCE
-            audio.context = new webkitAudioContext()
-            audio.analyser = audio.context.createAnalyser()
-            audio.mediaSource = audio.context.createMediaElementSource(audio)
-            //CONNECT SOURCE > ANALISER > DESTINATION
-            audio.mediaSource.connect(audio.analyser)
-            audio.analyser.connect(audio.context.destination)
-        }
-        //CREATE AUDIO DATA ARRAY
-        audio.frequencyData = new Uint8Array(audio.analyser.frequencyBinCount)
-    } 
-
-    var setupSpectre = function(){
-        //CREATE SPECTRE CONTAINER
-        spectre = document.createElement('div')
-        spectre.style.width = audio.offsetWidth + 'px'
-        spectre.id = 'spectre'
-
-        $('#audio_only').show()
-        $('#audio_only').append(spectre)
-
-        //CALC NUM OF BARS AND OFFSET
-        var padd = 6,
-            gap = 4,
-            w = 10,
-            widthBar = w + gap,
-            widthInner = (audio.offsetWidth - (2 * padd))
-
-        count = parseInt(widthInner / widthBar) 
-        offset = parseInt(audio.analyser.frequencyBinCount / count)
-
-        //CREATE BARS
-        for (var i = 0; i < count; ++i) {
-            var bar = document.createElement('div')
-            bar.style.left = (padd + gap/2 + ((w + gap) * i)) + 'px'
-            bar.className = 'bar'
-            spectre.appendChild(bar)
-        }
-    }
-
-    setupContext();
-    setupSpectre();
-
-    loop()
-
-}
-
-
 
 var messages = {
     'Browser': 'Your browser is not <a href="http://caniuse.com/bloburls">supported</a>!',

@@ -1,0 +1,114 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    width: 100%;
+    background: #c4c4c4;
+}
+
+header h1{
+    font-family: 'Play', sans-serif;
+    font-size: 64px;
+    color: #24c7c0;
+    text-align: center;
+    text-shadow:0px 0px 0 rgb(231,231,231),
+                1px 1px 0 rgb(216,216,216),
+                2px 2px 0 rgb(202,202,202),
+                3px 3px 0 rgb(187,187,187),
+                4px 4px 0 rgb(173,173,173),
+                5px 5px 0 rgb(158,158,158), 
+                6px 6px 0 rgb(144,144,144),
+                7px 7px 6px rgba(0,0,0,0.6),
+                7px 7px 1px rgba(0,0,0,0.5),
+                0px 0px 6px rgba(0,0,0,.2);
+}
+h2{
+    font-size: 40px;
+    text-align: center;
+}
+section, .playlist-mb{
+    padding: 0 10px 10px 10px;
+}
+.nowplay{
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#00b5b5),to(#36faee));
+    background-image: -webkit-linear-gradient(#00b5b5,#36faee);
+    background-image: -moz-linear-gradient(#00b5b5,#36faee);
+    background-image: -ms-linear-gradient(#00b5b5,#36faee);
+    background-image: -o-linear-gradient(#00b5b5,#36faee);
+    background-image: linear-gradient(#00b5b5,#36faee);
+}
+.others{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.right{float: right;}
+.clear{clear: both;}
+
+/* ------- Circle Controll ------ */
+.circle{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+    border-radius: 50%;
+    background: #25282b;
+    zoom: 90%;
+}
+
+.circle li {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    list-style: none;
+}
+
+.circle img{
+    position: absolute;
+    top: 15px;
+    left: 20px;
+}
+
+.play img{
+    position: absolute;
+    top: 63px;
+    left: 62px;
+}
+
+.circle li:nth-child(1) {
+  top: 15px;
+  left: 120px;
+}
+ 
+.circle li:nth-child(2) {
+  top: 125px;
+  left: 235px;
+}
+ 
+.circle li:nth-child(3) {
+  top: 235px;
+  left: 125px;
+}
+ 
+.circle li:nth-child(4) {
+    top: 125px;
+    left: 20px;
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+
+.play {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    margin: 150px 0 0 150px;
+    border-radius: 50%;
+    background: #16181d;
+    top: -75px;
+    left: -75px;
+}
+.ui-body-c {
+    background: 'url(http://vagnersantana.com/player.io/assets/img/bg.png) repeat';
+}

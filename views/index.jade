@@ -1,0 +1,77 @@
+!!! 5
+html(lang='en')
+  head
+    title #{title}
+    meta(charset='utf-8')
+    meta(name='description', content='Player.io is a media center thats run on your browser. Made with node.js, socket.io and File Access API, that is, just javascript! By Vagner Santana')
+    meta(name='keywords', content='player.io, node.js, socket.io, websocket, vagner santana, html5, javascript')
+    meta(name='google-translate-customization', content='dbc4517b25696e6d-310dde8079d2815c-gec2e12fa0709c073-19')
+    link(href='assets/img/favicon.ico', rel='shortcut icon')
+    link(href='assets/css/style.css', rel='stylesheet')
+    //OPEN GRAPH
+    meta(property='og:title', content='Player.IO | Vagner Santana')
+    meta(property='og:type', content='website')
+    meta(property='og:url', content='http://vagnersantana.com/player.io')
+    meta(property='og:image', content='http://vagnersantana.com/player.io/assets/img/logo.png')
+    meta(property='og:site_name', content='Player.IO | Vagner Santana')
+    meta(property='og:description', content='Player.io is a media center thats run on your browser. Made with node.js, socket.io and File Access API, that is, just javascript! By Vagner Santana')
+    //FONTS
+    link(href='http://fonts.googleapis.com/css?family=Ubuntu:300', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Play:700', rel='stylesheet', type='text/css')
+
+  body
+    a(href='https://github.com/vagnervjs/player.io', target='_blank')
+      img(style='position: absolute; top: 0; right: 0; border: 0;', src='https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', alt='Fork me on GitHub')
+    header
+      h1
+        a(href='http://vagnersantana.com/player.io/') Player.IO
+    section.container
+      aside.left
+        h2 Playlist
+        p
+          button#open Open 
+          |  a local media or...
+          input#fileinp(style='display: none;', type='file', name='file', multiple='multiple')
+        p
+          button#add Add 
+          |  a media URL bellow:
+        input#mediaurl(type='text', value='http://vagnersantana.com/video.mp4', placeholder='http://vagnersantana.com/player.io/media/video.mp4')
+        #message
+        .playlist
+          ul.playlist-ul
+            span#no_file No files to play!
+      aside.right
+        h2 Mobile
+        p
+          | Read this QR Code on your
+          span.ft smartphone
+          | , or just open the link address.
+        #qr
+      .content
+        #audio_only
+        video#player(autobuffer='autobuffer', autoplay='autoplay', controls='controls')
+      .clear
+      footer
+        #google_translate_element
+        script(type='text/javascript')
+          function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');}
+        script(type='text/javascript', src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit')
+        span
+          | made by 
+          a(href='http://vagnersantana.com', target='_blank') Vagner Santana
+    //JS Files 
+    script(src='assets/js/jquery.min.js')
+    script(src='assets/js/socket.io.js')
+    script(src='assets/js/client.js')
+    script(src='assets/js/spectre.js')
+    script(src='assets/js/media.js')
+    //Google Analytics 
+    script(type='text/javascript')
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-32909284-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
