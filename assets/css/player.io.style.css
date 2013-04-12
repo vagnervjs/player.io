@@ -1,0 +1,219 @@
+/*
+	Author: Vagner Santana;
+			vagnersantana.com
+*/
+
+*{
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	padding: 0;
+	border: 0;
+  background: #eee url(../img/bg_mini.png) repeat;
+  font-family: 'Ubuntu', serif;
+	color: #3c3b41;
+	text-shadow: 0 1px 0 #fff;
+}
+
+header{
+  width: 100%;
+  padding: 10px 0 20px;
+}
+header h1{
+  font-family: 'Fredericka the Great', sans-serif;
+  font-size: 64px;
+  font-weight: lighter;
+  color: #000;
+  text-shadow: 1px 3px 1px #fff;
+  display: inline-block;
+  transition: text-shadow 1s;
+}
+
+header h1:hover{
+  text-shadow: 3px 3px 9px #444;
+}
+
+a{color: #8a93a0; text-decoration: none; text-shadow: #fff 0 1px 0;}
+a:hover{color: #445259;}
+p{font-size: 14px;}
+.bluebold{color: #489ebf; font-weight: bold;}
+
+/* Player */
+video{
+	width: 100%;
+	margin: 0 auto;
+  box-shadow: 0 0 35px #000;
+	background: #000000;
+}
+
+video.standard{
+  height: 0;
+  padding-bottom: 75%; /* STANDARD 4:3 */
+}
+
+video.widescreen{
+  padding-bottom: 56.25%; /* HD WIDESCREEN 16:9 */
+}
+
+#audio_only{
+	display: hidden;
+	padding: 0;
+}
+
+.fullScreen{
+	position: fixed;
+	top: 0;
+	left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Layout */
+body, .container{
+  margin: 0 auto;
+  min-width: 800px;
+}
+
+aside{
+  padding: 0 15px 15px;
+}
+
+.content{
+  margin-left: 260px;
+	margin-right: 220px;
+}
+
+.left{
+  width: 230px;
+  overflow: hidden;
+  float: left;
+}
+
+.right{
+  width: 190px;
+  overflow: hidden;
+	float: right;
+}
+
+.options p{
+  padding: 0;
+}
+
+.playlist{
+	width: 200px;
+	height: 320px;
+	padding: 10px;
+	background: #e4e4e4;
+	overflow-x: hidden;
+	overflow-y: auto;	
+	box-shadow: 0px 0px 3px #555 inset;
+	border-radius: 10px;
+}
+
+.playlist ul{
+	list-style: none;
+
+}
+
+.playlist-li{
+  cursor: pointer;
+  border-bottom: 1px dashed #b5b5b5;
+  padding: 6px 0;
+  color: #8a93a0;
+}
+
+.playlist-li:hover{
+	color: #445259;
+}
+
+.playlist hr{
+	margin: 10px 0 10px 0;
+}
+
+.nowplay{
+	color: #25aba0;
+}
+
+#message, #message a{
+	color: red;
+}
+
+ul {
+	-webkit-padding-start: 5px !important;
+	-moz-padding-start: 5px !important;
+	-ms-padding-start: 5px !important;
+	-o-padding-start: 5px !important;
+	padding-start: 5px !important;
+}
+aside p, input, div{
+	padding: 4px; 
+}
+h2{
+	font-size: 28px;
+	margin-bottom: 15px;
+} 
+
+header, footer{
+	text-align: center;
+}
+
+footer{
+	border-top: 1px dashed #b5b5b5;
+	margin-top: 10px;
+	padding: 16px 0;
+  clear: both;
+}
+
+input, select, button { cursor: pointer; }
+
+input, select { margin: 4px; }
+
+.options p { margin: 2px; height: 26px;}
+
+input[disabled] { cursor: default; }
+
+.github{ padding: 0; }
+
+#mediaurl{ margin: 8px; width: 180px;}
+
+#fileinp{ display: none; }
+
+.github img{
+  position: absolute; top: 0; right: 0; border: 0;
+}
+
+#spectre{
+    position: absolute;
+    padding: 0;
+}
+
+#spectre .bar{
+    position: absolute;
+    bottom: 2.8em;
+    width: 10px;
+    min-height: 0.4em;
+    border-radius: 0.4em;
+    background: blue;
+    background-position: 0% 100%;
+    background-image: -webkit-linear-gradient(top, red 0%, green 50% , blue 100%);
+}
+
+#google_translate_element{
+	display: inline;
+	margin: 2em;
+}
+
+#google_translate_element div{
+	display: inline;
+	font-family: 'Ubuntu';
+	font-size: 0px;
+	color: #3c3b41;
+	text-shadow: #fff 0 1px 0;
+}
+
+a.goog-logo-link{
+	display: none;
+}

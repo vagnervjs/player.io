@@ -6,22 +6,16 @@ html, body{
     background: #c4c4c4;
 }
 
-header h1{
-    font-family: 'Play', sans-serif;
-    font-size: 64px;
-    color: #24c7c0;
+header{
     text-align: center;
-    text-shadow:0px 0px 0 rgb(231,231,231),
-                1px 1px 0 rgb(216,216,216),
-                2px 2px 0 rgb(202,202,202),
-                3px 3px 0 rgb(187,187,187),
-                4px 4px 0 rgb(173,173,173),
-                5px 5px 0 rgb(158,158,158), 
-                6px 6px 0 rgb(144,144,144),
-                7px 7px 6px rgba(0,0,0,0.6),
-                7px 7px 1px rgba(0,0,0,0.5),
-                0px 0px 6px rgba(0,0,0,.2);
 }
+
+header img{
+    width  : 50%;
+    height : auto;
+    padding: 20px 0 0;
+}
+
 h2{
     font-size: 40px;
     text-align: center;
@@ -41,6 +35,9 @@ section, .playlist-mb{
     margin-left: 5px;
     margin-right: 5px;
 }
+
+#fullscreen{ cursor: pointer; }
+
 .right{float: right;}
 .clear{clear: both;}
 
@@ -66,12 +63,7 @@ section, .playlist-mb{
     position: absolute;
     top: 15px;
     left: 20px;
-}
-
-.play img{
-    position: absolute;
-    top: 63px;
-    left: 62px;
+    cursor: pointer;
 }
 
 .circle li:nth-child(1) {
@@ -99,7 +91,7 @@ section, .playlist-mb{
     transform:rotate(180deg);
 }
 
-.play {
+#play {
     position: absolute;
     width: 150px;
     height: 150px;
@@ -109,6 +101,13 @@ section, .playlist-mb{
     top: -75px;
     left: -75px;
 }
+
+#play img{
+    position: absolute;
+    top: 63px;
+    left: 62px;
+}
+
 .ui-body-c {
     background: 'url(http://vagnersantana.com/player.io/assets/img/bg.png) repeat';
 }

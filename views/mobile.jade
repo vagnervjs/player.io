@@ -1,47 +1,45 @@
 !!! 5
-html
-    head
-        meta(charset="utf-8")
-        meta(name="viewport", content="width=device-width, user-scalable=no")
-        title #{title}
-        link(href="http://vagnersantana.com/player.io/assets/img/favicon.ico", rel="shortcut icon")
-        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
-        link(rel='stylesheet', href='../assets/css/mobile.css')
-        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-        script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
-        script(src='../assets/js/socket.io.js')
-        script(src='../assets/js/mobile.js')
+html(lang='en')
+  head
+    title #{title}
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, user-scalable=no")
+    link(rel="shortcut icon", href="../assets/img/favicon.ico")
+    link(rel='stylesheet', href='../assets/css/jquery.mobile.min.css')
+    link(rel='stylesheet', href='../assets/css/player.io.mobile.css')
+    //Jquery
+    script(src='../assets/js/jquery.min.js')
+    script(src='../assets/js/jquery.mobile.min.js')
 
-    body(id="#{id}")
-        header
-            h1 Player.IO
-        section
-            .circle
-                ul
-                    li
-                        a(href="#", id="vol_up")
-                            img(src="http://vagnersantana.com/player.io/assets/img/icons/vol_up.svg", alt="Icon")
-                    li
-                        a(href="#", id="next")
-                            img(src="http://vagnersantana.com/player.io/assets/img/icons/ff.svg", alt="Icon")
-                    li
-                        a(href="#", id="vol_down")
-                            img(src="http://vagnersantana.com/player.io/assets/img/icons/vol_down.svg", alt="Icon")
-                    li
-                        a(href="#", id="prev")
-                            img(src="http://vagnersantana.com/player.io/assets/img/icons/ff.svg", alt="Icon")
-                .play
-                    a(href="#", id="play")
-                        img(src="http://vagnersantana.com/player.io/assets/img/icons/play.svg", alt="Icon")
+  body(id="#{id}")
+    header
+      a(href='http://vagnersantana.com/player.io/')
+        img(src="../assets/img/logo_mini.png", alt="Player.IO")
+    section
+      .circle
+        ul
+          li(id="vol_up")
+            img(src="../assets/img/icons/vol_up.svg", alt="Icon")
+          li(id="next")
+            img(src="../assets/img/icons/ff.svg", alt="Icon")
+          li(id="vol_down")
+            img(src="../assets/img/icons/vol_down.svg", alt="Icon")
+          li(id="prev")
+            img(src="../assets/img/icons/ff.svg", alt="Icon")
+          li(id="play")
+            img(src="../assets/img/icons/play.svg", alt="Icon")
 
-            .others
-                a(href="#", id="fullscreen", class="right")
-                    img(src="http://vagnersantana.com/player.io/assets/img/icons/fullscreen.svg", alt="Icon")
-                h3(class="clear") Time (%)
-                input(type="range", name="slider", id="time", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
-        section 
-            .playlist-mb
-                h2 Playlist
-                ul(data-role="listview", data-inset="true")
-                    li(id="no") 
-                        a(data-fileid="no") No files to play!
+      .others
+        .right(id="fullscreen")
+          img(src="../assets/img/icons/fullscreen.svg", alt="Icon")
+        h3(class="clear") Time (%)
+        input(type="range", name="slider", id="time", value="0", min="0", max="100", data-theme="a", data-track-theme="b")
+    section 
+      .playlist-mb
+        h2 Playlist
+        ul(id="playlist", data-role="listview", data-inset="true")
+          li(id="no") 
+            a(data-fileid="no") No files to play!
+  //JS Files 
+  script(src='../assets/js/socket.io.min.js')
+  script(src='../assets/js/player.io.mobile.js')
