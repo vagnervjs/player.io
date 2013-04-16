@@ -4,57 +4,57 @@
 */
 
 PlayerIO = function(){
-
   this.player = $('#player').get(0);
   this.id = this.randomId();
+  var playerContext= this;
 
   //enable local files
   var URL = window.URL || window.webkitURL;
   if(!URL){
-    $('#open').attr('disabled')
-  } else { 
-    $('#open').click( function(){ 
+    $('#open').attr('disabled');
+  } else {
+    $('#open').on('click', function(){
       $('#fileinp').click();
     });
-  };
-  
-  //get local files   
-  var playerContext= this;                       
-  $('#fileinp').change( function(){ 
+  }
+
+  //get local files
+  $('#fileinp').change( function(){
     var arrFile = this.files[0];
     var size = (this.files.length);
     for (var i = 0; i < size; i++) {
       var file = this.files[i];
       playerContext.checkFileType(file);
-    };
+    }
     $('#fileinp').val(null);
   });
 
   //add input url
-  $('#add').click( function(){
+  $('#add').on('click', function(){
     var url = $("#mediaurl").val();
     var validateURL = '';
     //TODO validateURL
     if(!url) {
       playerContext.displayMessage('URL');
     } else {
-      $('#no_file').hide();
       playerContext.addToPlayList(url);
       $('#mediaurl').val(null);
     }
   });
 
   //clear input on click
-  $('#mediaurl').click( function(){ this.value = '' } );
+  $('#mediaurl').on('click', function(){
+    this.value = '';
+  });
 
   //screen ratio
-  $('#screenratio').change( function(event){ 
-    playerContext.changeRatio(event.target.value)
+  $('#screenratio').on('change', function(event){
+    playerContext.changeRatio(event.target.value);
   });
 
   //fullscreen
-  $('#fullscreen').click( function(event){ 
-    playerContext.fullScreenToggle(event); 
+  $('#fullscreen').on('click', function(event){
+    playerContext.fullScreenToggle(event);
   });
   $(document).keydown( function(event) {
     if(event.which == 122){ //F11
@@ -70,10 +70,11 @@ PlayerIO = function(){
 
   //draw QR code
   this.drawQR(this.id);
+};
 
-}
-
-// Helper Functions
+/**************************************************/
+/*              Helper Functions                  */
+/**************************************************/
 
 PlayerIO.prototype.displayMessage = function(type, message) {
   var messages = {
@@ -82,7 +83,7 @@ PlayerIO.prototype.displayMessage = function(type, message) {
     'URL': 'Insert a valid media URL',
     'Type': 'Unable to play file type: ',
     'Duration': 'Unable to play this file.'
-  }
+  };
   $('#message').html(messages[type] + (message || ''));
 };
 
@@ -94,11 +95,11 @@ PlayerIO.prototype.randomId = function() {
     newId += abc.charAt(Math.floor(Math.random() * abc.length));
 
   return newId;
-}
+};
 
 //Screen
 //TODO auto resize
-PlayerIO.prototype.changeRatio = function(ratio){ 
+PlayerIO.prototype.changeRatio = function(ratio){
   var w = $('#player').width();
   switch(ratio){
     case 'auto':
@@ -114,9 +115,9 @@ PlayerIO.prototype.changeRatio = function(ratio){
       $('#player').height((0.5625 * w) + 'px');
       break;
   }
-}
+};
 
-PlayerIO.prototype.checkFullScreenSupport = function(){ 
+PlayerIO.prototype.checkFullScreenSupport = function(){
   this.browserPrefix = '';
   if(document.cancelFullScreen) return true;
   var browserPrefixes = ['webkit', 'moz', 'o', 'ms', 'khtml'];
@@ -124,10 +125,10 @@ PlayerIO.prototype.checkFullScreenSupport = function(){
     this.browserPrefix = browserPrefixes[i];
     if (document[browserPrefixes[i] + 'CancelFullScreen']) {
       return true;
-    }    
+    }
   }
   return false;
-}
+};
 
 PlayerIO.prototype.fullScreenToggle = function(event){
   event.preventDefault();
@@ -136,9 +137,9 @@ PlayerIO.prototype.fullScreenToggle = function(event){
   } else {
     this.cssFullScreenToggle();
   }
-}
+};
 
-PlayerIO.prototype.html5FullScreenToggle = function(){ 
+PlayerIO.prototype.html5FullScreenToggle = function(){
   if(!this.fullScreen){
     this.fullScreen = true;
     (this.browserPrefix == '') ? this.player.requestFullScreen() : this.player[this.browserPrefix + 'RequestFullScreen']();
@@ -146,9 +147,9 @@ PlayerIO.prototype.html5FullScreenToggle = function(){
     this.fullScreen = false;
     (this.browserPrefix == '') ? document.cancelFullScreen() : document[this.browserPrefix + 'CancelFullScreen']();
   }
-}
+};
 
-PlayerIO.prototype.cssFullScreenToggle = function(){ 
+PlayerIO.prototype.cssFullScreenToggle = function(){
   if (!this.fullScreen) {
     this.fullScreen = true;
     $('video').addClass('fullScreen');

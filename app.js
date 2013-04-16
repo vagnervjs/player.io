@@ -15,7 +15,7 @@ app.use(express.static(__dirname));
 
 //default view
 app.get('/', function (req, res) {
-  res.setHeader('Content-Security-Policy', 
+  res.setHeader('Content-Security-Policy',
     "default-src 'self' https://chart.googleapis.com; " +
     "connect-src 'self' ws://localhost:8080/; "+
     "script-src 'self' http://www.google-analytics.com; "+
@@ -28,7 +28,7 @@ app.get('/', function (req, res) {
 //mobile view
 app.get('/mb/:id', function (req, res) {
   var id = req.params.id;
-  res.setHeader('Content-Security-Policy', 
+  res.setHeader('Content-Security-Policy',
     "default-src 'self'; "+
     "connect-src 'self' ws://localhost:8080/ ");
   res.render('mobile.jade', {id: id, title:'Player.IO | Control'});
@@ -47,7 +47,7 @@ io.sockets.on('connection', function (socket) {
     console.log("ID: " + id);
     players[id] = {};
     players[id].player = socket;
-  });  
+  });
 
   //TODO save playlists and users in database
   socket.on('setPlaylist', function (data) {
@@ -72,7 +72,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('control', function (data) {
     var id = data.id;
     players[id].player.emit('control', data);
-  }); 
+  });
 
 });
 

@@ -2,7 +2,6 @@ html, body{
     margin: 0;
     padding: 0;
     width: 100%;
-    width: 100%;
     background: #c4c4c4;
 }
 
@@ -11,8 +10,9 @@ header{
 }
 
 header img{
-    width  : 50%;
-    height : auto;
+    min-width: 230px;
+    width: 25%;
+    height: auto;
     padding: 20px 0 0;
 }
 

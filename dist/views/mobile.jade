@@ -1,0 +1,240 @@
+!!! 5
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, user-scalable=no")
+        title #{title}
+        link(href="http://vagnersantana.com/player.io/assets/img/favicon.ico", rel="shortcut icon")
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+        script(src='http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
+        script(src='http://vagnersantana.com:8080/socket.io/socket.io.js')
+        script(type='text/javascript')
+            $(document).bind('pageinit', function() {
+                // CSS Changes
+                $('.ui-body-c').css({background: 'url(http://vagnersantana.com/player.io/assets/img/bg.png) repeat'});
+
+                // Socket.io
+                var socket = io.connect('http://vagnersantana.com:8080');
+                var id = $('body').attr('id');
+
+                socket.emit('setId', id + 'mb');
+                socket.on('newPlaylist', function (data) {
+                    var html = '';
+                    $("#no").remove();
+                    for(var i=0, t=data.pl.length; i<t; i++){
+                        html = html + '<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a class="ui-link-inherit" data-fileid="' + data.pl[i].file + '">'+ data.pl[i].fileName + '</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>';
+                    }
+                    $('.playlist-mb ul').html(html);
+                });
+
+                //Events
+
+                // Play / Pause
+                $('#play').tap(function() {
+                    if(!$(this).hasClass('playing')){
+                        $(this).addClass('playing');
+                        $(this).html('<img src="http://vagnersantana.com/player.io/assets/img/icons/pause.svg", alt="Icon">');
+                        $.get('/player/#{id}/play', function() {});
+                    } else {
+                        $(this).removeClass('playing');
+                        $(this).html('<img src="http://vagnersantana.com/player.io/assets/img/icons/play.svg", alt="Icon">');
+                        $.get('/player/#{id}/pause', function() {});
+                    }
+                });
+
+                // Volume Up
+                $('#vol_up').tap(function() {
+                    $.get('/player/#{id}/volup', function() {});
+                });
+
+                // Volume Down
+                $('#vol_down').tap(function() {
+                    $.get('/player/#{id}/voldown', function() {});
+                });
+
+                // Full Screen Toggle
+                $('#fullscreen').tap(function() {
+                    $.get('/player/#{id}/fullscreen', function() {});
+                });
+
+                // Previous Track
+                $('#prev').tap(function() {
+                    $.get('/player/#{id}/prev', function() {});
+
+                    $('#play').addClass('playing');
+                    $('#play').html('<img src="http://vagnersantana.com/player.io/assets/img/icons/pause.svg", alt="Icon">');
+                });
+
+                // Next Track
+                $('#next').tap(function() {
+                    $.get('/player/#{id}/next', function() {});
+
+                    $('#play').addClass('playing');
+                    $('#play').html('<img src="http://vagnersantana.com/player.io/assets/img/icons/pause.svg", alt="Icon">');
+                });
+
+                // Change Time
+                $("#time").on("change", function(){
+                    var value = $("#time").val();
+                    $.get('/player/#{id}/seek/' + value, function() {});
+                });
+
+                // Select Track to play
+                $('.playlist-mb').on("tap", "a", function(){
+                    var value = $(this).attr('data-fileid');
+                    if(value != "no"){
+                        $('.playlist-mb a').removeClass('nowplay');
+                        $(this).addClass("nowplay");
+
+                        $('#play').addClass('playing');
+                        $('#play').html('<img src="http://vagnersantana.com/player.io/assets/img/icons/pause.svg", alt="Icon">');
+
+                        $.get('/player/#{id}/change/' + value, function() {});
+                    }
+                });
+            });
+        style
+            html, body{
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                width: 100%;
+                background: #c4c4c4;
+            }
+            header h1{
+                font-family: 'Play', sans-serif;
+                font-size: 64px;
+                color: #24c7c0;
+                text-align: center;
+                text-shadow:0px 0px 0 rgb(231,231,231),
+                            1px 1px 0 rgb(216,216,216),
+                            2px 2px 0 rgb(202,202,202),
+                            3px 3px 0 rgb(187,187,187),
+                            4px 4px 0 rgb(173,173,173),
+                            5px 5px 0 rgb(158,158,158), 
+                            6px 6px 0 rgb(144,144,144),
+                            7px 7px 6px rgba(0,0,0,0.6),
+                            7px 7px 1px rgba(0,0,0,0.5),
+                            0px 0px 6px rgba(0,0,0,.2);
+            }
+            h2{
+                font-size: 40px;
+                text-align: center;
+            }
+            section, .playlist-mb{
+                padding: 0 10px 10px 10px;
+            }
+            .nowplay{
+                background-image: -webkit-gradient(linear,left top,left bottom,from(#00b5b5),to(#36faee));
+                background-image: -webkit-linear-gradient(#00b5b5,#36faee);
+                background-image: -moz-linear-gradient(#00b5b5,#36faee);
+                background-image: -ms-linear-gradient(#00b5b5,#36faee);
+                background-image: -o-linear-gradient(#00b5b5,#36faee);
+                background-image: linear-gradient(#00b5b5,#36faee);
+            }
+            .others{
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+            .right{float: right;}
+            .clear{clear: both;}
+
+            /* ------- Circle Controll ------ */
+            .circle{
+                position: relative;
+                width: 300px;
+                height: 300px;
+                margin: 20px auto;
+                border-radius: 50%;
+                background: #25282b;
+                zoom: 90%;
+            }
+
+            .circle li {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                list-style: none;
+            }
+
+            .circle img{
+                position: absolute;
+                top: 15px;
+                left: 20px;
+            }
+
+            .play img{
+                position: absolute;
+                top: 63px;
+                left: 62px;
+            }
+
+            .circle li:nth-child(1) {
+              top: 15px;
+              left: 120px;
+            }
+             
+            .circle li:nth-child(2) {
+              top: 125px;
+              left: 235px;
+            }
+             
+            .circle li:nth-child(3) {
+              top: 235px;
+              left: 125px;
+            }
+             
+            .circle li:nth-child(4) {
+                top: 125px;
+                left: 20px;
+                -webkit-transform:rotate(180deg);
+                -moz-transform:rotate(180deg);
+                -ms-transform:rotate(180deg);
+                -o-transform:rotate(180deg);
+                transform:rotate(180deg);
+            }
+
+            .play{
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                margin: 150px 0 0 150px;
+                border-radius: 50%;
+                background: #16181d;
+                top: -75px;
+                left: -75px;
+            }
+    body(id="#{id}")
+            header
+                h1 Player.IO
+            section
+                .circle
+                    ul
+                        li
+                            a(href="#", id="vol_up")
+                                img(src="http://vagnersantana.com/player.io/assets/img/icons/vol_up.svg", alt="Icon")
+                        li
+                            a(href="#", id="next")
+                                img(src="http://vagnersantana.com/player.io/assets/img/icons/ff.svg", alt="Icon")
+                        li
+                            a(href="#", id="vol_down")
+                                img(src="http://vagnersantana.com/player.io/assets/img/icons/vol_down.svg", alt="Icon")
+                        li
+                            a(href="#", id="prev")
+                                img(src="http://vagnersantana.com/player.io/assets/img/icons/ff.svg", alt="Icon")
+                    .play
+                        a(href="#", id="play")
+                            img(src="http://vagnersantana.com/player.io/assets/img/icons/play.svg", alt="Icon")
+
+                .others
+                    a(href="#", id="fullscreen", class="right")
+                        img(src="http://vagnersantana.com/player.io/assets/img/icons/fullscreen.svg", alt="Icon")
+                    h3(class="clear") Time (%)
+                    input(type="range", name="slider", id="time", value="50", min="0", max="100", data-theme="a", data-track-theme="b")
+        section 
+            .playlist-mb
+                h2 Playlist
+                ul(data-role="listview", data-inset="true")
+                    li(id="no") 
+                        a(data-fileid="no") No files to play!

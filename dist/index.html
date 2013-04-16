@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" >
+	<meta property="og:title" content="Player.IO | Vagner Santana"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="http://vagnersantana.com/player.io"/>
+	<meta property="og:image" content="http://vagnersantana.com/player.io/assets/img/logo.png"/>
+	<meta property="og:site_name" content="Player.IO | Vagner Santana"/>
+	<meta property="og:description"
+	      content="Player.io is a media center thats run on your browser. Made with node.js, socket.io and File Access API, that is, just javascript! By Vagner Santana"/>
+	<meta name="description" content="Player.io is a media center thats run on your browser. Made with node.js, socket.io and File Access API, that is, just javascript! By Vagner Santana">
+	<meta name="keywords" content="player.io, node.js, socket.io, websocket, vagner santana, html5, javascript">
+
+	<title>Player.IO</title>
+	<link href="assets/img/favicon.ico" rel="shortcut icon">
+	<link rel="stylesheet" href="assets/css/all.min.css">
+	<link href="http://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Play:700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<a href="https://github.com/vagnervjs/player.io" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+	<header>
+		<h1>Player.IO</h1>
+	</header>
+	<section class="container">
+	    <aside class="left">
+	    	<h2>Files</h2>
+			<input type="file" name="file" id="fileinp" multiple/>
+			<p>Or, enter a media URL:</p>
+			<input type="text" id="mediaurl" value="http://vagnersantana.com/video.mp4" placeholder="http://vagnersantana.com/player.io/media/video.mp4">
+			<button id="add">Add</button>
+	    	<div id="message"></div>
+	    	<div class="playlist">
+	    		<h3>Playlist</h3>
+	    		<hr>
+	    		<ul class="playlist-ul">
+	    			<span class="file no">No files to play!</span>
+	    		</ul>
+	    	</div>
+	    </aside>
+	    <aside class="right">
+	    	<h2>Control</h2>
+	    	<p>Read this QR Code on your <span class="ft">smartphone</span>, or just open the link address (click to view the link).</p>
+			<div id="qr"></div>
+	    </aside>
+	    <div class="content">
+	    	<video id="player" autobuffer autoplay controls></video>
+	    </div>
+	    <div class="clear"></div>
+	    <footer>
+			<span>made by <a href="http://vagnersantana.com" target="_blank">Vagner Santana</a></span>
+	    </footer>
+	</section>
+
+	<!-- JS Files -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	if (typeof jQuery == 'undefined'){
+	    document.write(unescape("%3Cscript src='assets/js/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+	}
+	</script>
+	<script src="assets/js/socket.io.js"></script>
+	<script src="assets/js/all.min.js"></script>
+
+	<!-- Google Analytics -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-32909284-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</body>
+</html>

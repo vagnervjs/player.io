@@ -7,11 +7,11 @@
 PlayerIO.prototype.connect = function(id){
 
   this.socket = io.connect(location.origin);
-
   this.socket.emit('setId', {id: id});
 
-  var playerContext = this; 
-  this.socket.on('control', function (data) { 
+  var playerContext = this;
+  this.socket.on('control', function (data) {
+    var pl = $('.playlist-ul li');
     switch(data.action) {
       case 'play':
         playerContext.player.play();
@@ -32,21 +32,18 @@ PlayerIO.prototype.connect = function(id){
         playerContext.player.volume -= 0.1;
         break;
       case 'prev':
-        var pl = $('.playlist-ul li');
-        var lo
         $.each(pl, function(){
           if($(this).hasClass('nowplay')){
-            if ($(this).prev() != undefined) {
+            if ($(this).prev() !== undefined) {
               playerContext.playMedia($(this).prev());
             }
           }
         });
         break;
       case 'next':
-        var pl = $('.playlist-ul li');
         $.each(pl, function(){
           if($(this).hasClass('nowplay')){
-            if ($(this).next() != undefined) {
+            if ($(this).next() !== undefined) {
               playerContext.playMedia($(this).next());
             }
           }
@@ -58,19 +55,18 @@ PlayerIO.prototype.connect = function(id){
         playerContext.player.currentTime = newTime;
         break;
       case 'change':
-        $.each($('.playlist-ul li'), function(){
+        $.each(pl, function(){
           if($(this).attr('data-fileid') == data.val){
             playerContext.playMedia($(this));
           }
-        })
+        });
         break;
       case 'playlist':
         playerContext.updatePlaylist();
         break;
     }
   });
-}
-
+};
 
 //Draw QR Code
 PlayerIO.prototype.drawQR = function(id) {
@@ -83,16 +79,16 @@ PlayerIO.prototype.drawQR = function(id) {
     '</a>'
   ].join('');
   $("#qr").html(qr);
-}
+};
 
 //send new lists to the server
 PlayerIO.prototype.updatePlaylist = function(){
   var pl = $('.playlist-ul li'),
-    list = [];
+      list = [];
 
   $.each(pl, function(){
     list.push({
-      file: $(this).attr('data-fileid'), 
+      file: $(this).attr('data-fileid'),
       fileName: $(this).attr('data-filename')
     });
   });
@@ -104,4 +100,4 @@ PlayerIO.prototype.updatePlaylist = function(){
     };
     this.socket.emit('setPlaylist', data);
   }
-}
+};

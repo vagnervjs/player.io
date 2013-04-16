@@ -13,27 +13,27 @@ PlayerIO.prototype.checkFileType = function(file){
   } else {
     this.displayMessage('Type', file.type);
   }
-}
+};
 
 //create list item and send new list
-PlayerIO.prototype.addToPlayList = function(url, name){  
+PlayerIO.prototype.addToPlayList = function(url, name){
   $('#no_file').remove();
   this.displayMessage('Clear');
   if(!name) name = url.slice(url.lastIndexOf('/') + 1);
-  var li = $('<li data-file="' + url + '" data-fileid="' + this.randomId() + '" data-filename="' + name + '" class="playlist-li">' + name + '</li>')
+  var li = $('<li data-file="' + url + '" data-fileid="' + this.randomId() + '" data-filename="' + name + '" class="playlist-li">' + name + '</li>');
   var playerContext = this;
-  li.click( function(){
+  li.on('click', function(){
     playerContext.playMedia($(this));
   });
 
   $('.playlist-ul').append(li);
   this.updatePlaylist();
-}
+};
 
 //
 PlayerIO.prototype.playMedia = function(obj){
   var playerContext = this;
-  
+
   this.player.remove();
   var p = $('<video>');
 
@@ -55,27 +55,27 @@ PlayerIO.prototype.playMedia = function(obj){
 
   //RESET
   $('#audio_only').hide();
-  if(HTML5AudioSpectre.timer) clearTimeout(HTML5AudioSpectre.timer)
+  if(HTML5AudioSpectre.timer) clearTimeout(HTML5AudioSpectre.timer);
 
   this.player.addEventListener('canplay', function(){
-    playerContext.checkAudioOnly()
+    playerContext.checkAudioOnly();
   });
   //TODO use event instead of timeout (loadedmetadata, loadeddata, canplay, loadstart, progress -- none work)
-  setTimeout(this.checkVideoDuration, 5000, this)
-}
+  setTimeout(this.checkVideoDuration, 5000, this);
+};
 
 PlayerIO.prototype.checkVideoDuration = function(playerContext){
   var d = $('#player').get(0).duration;
   if(d <= 0 || isNaN(d)) {
     playerContext.displayMessage('Duration');
   }
-}
+};
 
 PlayerIO.prototype.checkAudioOnly = function(){
   var w = $('#player').get(0).videoWidth;
   var h = $('#player').get(0).videoHeight;
   if(!w && !h) HTML5AudioSpectre();
-}
+};
 
 $(document).ready(function() {
   window.playerIO = new PlayerIO();
