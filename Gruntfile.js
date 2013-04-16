@@ -29,7 +29,8 @@ module.exports = function(grunt) {
 						  'media',
 						  'style.css',
 						  'client.js',
-						  'media.js']
+						  'media.js',
+						  'dist']
 			},
 			deploy: {
 				src: './dist/',
