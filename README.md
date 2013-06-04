@@ -62,3 +62,7 @@ localhost:8080
 
 
 Obs.: To test the Player.IO on your smartphone you need a online server.
+
+## License
+
+- Code is under [MIT license](http://vagnersantana.mit-license.org)  © Vagner Santana
