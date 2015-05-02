@@ -10,8 +10,9 @@ PlayerIO.prototype.connect = function(id){
 
   this.socket.emit('setId', {id: id});
 
-  var playerContext = this; 
+  var playerContext = this;
   this.socket.on('control', function (data) { 
+    console.log('Received control: ' + data.action);
     switch(data.action) {
       case 'play':
         playerContext.player.play();

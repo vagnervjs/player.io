@@ -2,7 +2,7 @@ var HTML5AudioSpectre = function(){
   var audio = $('#player').get(0), count, data, offset, spectre;
 
   //RESET  
-  $('#spectre').remove()   
+  $('#spectre').remove();
 
   var ph = $('#player').height(),
       ih = ph - 60,
@@ -22,16 +22,18 @@ var HTML5AudioSpectre = function(){
 
   var setupContext = function(){
     //CREATE CONTEXT ANALYSER AND SOURCE
-    audio.context = new webkitAudioContext()
-    audio.analyser = audio.context.createAnalyser()
-    audio.mediaSource = audio.context.createMediaElementSource(audio)
+    if(!audio.context) {
+      audio.context = new AudioContext()
+      audio.analyser = audio.context.createAnalyser()
+      audio.mediaSource = audio.context.createMediaElementSource(audio)
 
-    //CONNECT SOURCE > ANALISER > DESTINATION
-    audio.mediaSource.connect(audio.analyser)
-    audio.analyser.connect(audio.context.destination)
+      //CONNECT SOURCE > ANALISER > DESTINATION
+      audio.mediaSource.connect(audio.analyser)
+      audio.analyser.connect(audio.context.destination)
 
-    //CREATE AUDIO DATA ARRAY
-    audio.frequencyData = new Uint8Array(audio.analyser.frequencyBinCount)
+      //CREATE AUDIO DATA ARRAY
+      audio.frequencyData = new Uint8Array(audio.analyser.frequencyBinCount);
+    }
   } 
 
   var setupSpectre = function(){
@@ -67,5 +69,5 @@ var HTML5AudioSpectre = function(){
   setupContext();
   setupSpectre();
 
-  loop()
+  loop();
 }

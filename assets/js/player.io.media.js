@@ -25,9 +25,11 @@ PlayerIO.prototype.addToPlayList = function(url, name){
   li.click( function(){
     playerContext.playMedia($(this));
   });
-
-  $('.playlist-ul').append(li);
-  this.updatePlaylist();
+  $('.playlist-ul').append(li); 
+  if(playerContext.first){
+    playerContext.first = false;
+    li.click();
+  }
 }
 
 //
@@ -61,7 +63,7 @@ PlayerIO.prototype.playMedia = function(obj){
     playerContext.checkAudioOnly()
   });
   //TODO use event instead of timeout (loadedmetadata, loadeddata, canplay, loadstart, progress -- none work)
-  setTimeout(this.checkVideoDuration, 5000, this)
+  setTimeout(this.checkVideoDuration, 1000, this)
 }
 
 PlayerIO.prototype.checkVideoDuration = function(playerContext){
@@ -74,15 +76,9 @@ PlayerIO.prototype.checkVideoDuration = function(playerContext){
 PlayerIO.prototype.checkAudioOnly = function(){
   var w = $('#player').get(0).videoWidth;
   var h = $('#player').get(0).videoHeight;
-  if(!w && !h) HTML5AudioSpectre();
+  if(!w || !h) HTML5AudioSpectre();
 }
 
 $(document).ready(function() {
   window.playerIO = new PlayerIO();
 });
-
-
-
-
-
-

@@ -108,6 +108,6 @@ section, .playlist-mb{
     left: 62px;
 }
 
-.ui-body-c {
-    background: 'url(http://vagnersantana.com/player.io/assets/img/bg.png) repeat';
+.ui-page {
+    background-image: url(../img/bg.png);
 }

@@ -19,9 +19,10 @@ app.get('/', function (req, res) {
     "default-src 'self' https://chart.googleapis.com; " +
     "connect-src 'self' ws://localhost:8080/; "+
     "script-src 'self' http://www.google-analytics.com; "+
-    "image-src 'self' https://chart.googleapis.com; "+
+    "img-src 'self' data: https://chart.googleapis.com; "+
+    "media-src *; "+
     "style-src 'self' http://fonts.googleapis.com; "+
-    "font-src 'self' http://themes.googleusercontent.com ");
+    "font-src 'self' http://fonts.gstatic.com ");
   res.render('index.jade', {title:'Player.IO'});
 });
 
@@ -30,6 +31,7 @@ app.get('/mb/:id', function (req, res) {
   var id = req.params.id;
   res.setHeader('Content-Security-Policy', 
     "default-src 'self'; "+
+    "img-src 'self' data:; "+
     "connect-src 'self' ws://localhost:8080/ ");
   res.render('mobile.jade', {id: id, title:'Player.IO | Control'});
 });
@@ -52,9 +54,10 @@ io.sockets.on('connection', function (socket) {
   //TODO save playlists and users in database
   socket.on('setPlaylist', function (data) {
     var id = data.id;
+    console.log("Playlist ID: " + id + '(' + data.playlist.length + ')');
     if(players[id]){
       players[id].playlist = data.playlist;
-      socket.emit('newPlaylist', {id: id, playlist: players[id].playlist});
+      socket.emit('newPlaylist', {id: id, playlist: data.playlist});
     } else {
       console.log('Error: No player ID found: ' + id);
     }
@@ -64,14 +67,19 @@ io.sockets.on('connection', function (socket) {
   socket.on('setMobId', function (data) {
     var id = data.id;
     console.log("MOB: " + id);
-    players[id].mobile = socket;
-    socket.emit('newPlaylist', {id: id, playlist: players[id].playlist});
+    if (players[id]) {
+      players[id].mobile = socket;
+      socket.emit('newPlaylist', {id: id, playlist: players[id].playlist});
+    }
   });
 
   //controls
-  socket.on('control', function (data) {
+  socket.on('control', function (data) {    
     var id = data.id;
-    players[id].player.emit('control', data);
+    console.log("Control ID: " + id + ' ' + data.action);
+    if (players[id]) {
+      players[id].player.emit('control', data);
+    }
   }); 
 
 });

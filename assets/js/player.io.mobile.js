@@ -7,7 +7,6 @@ $(document).ready( function() {
   // Socket.io
   var socket = io.connect(location.origin);
   var id = $('body').attr('id');
-  var url = 'http://vagnersantana.com/player.io/';
 
   socket.emit('setMobId', {id: id});
 
@@ -16,7 +15,7 @@ $(document).ready( function() {
     var list = [];
     $("#no").remove();
     for(var i=0, t= data.playlist.length; i<t; i++){
-      list.push('<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a class="ui-link-inherit" data-fileid="' + data.playlist[i].file + '">'+ data.playlist[i].fileName + '</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>');
+      list.push('<li><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" data-fileid="' + data.playlist[i].file + '">'+ data.playlist[i].fileName + '</a></li>');
     }
     $('#playlist').html(list.join(''));
   });
@@ -27,11 +26,11 @@ $(document).ready( function() {
   $('#play').tap(function() {
     if(!$(this).hasClass('playing')){
       $(this).addClass('playing');
-      $(this).html('<img src="'+ url +'/assets/img/icons/pause.svg", alt="Icon">');
+      $(this).html('<img src="/assets/img/icons/pause.svg", alt="Icon">');
       socket.emit('control', {id: id, action: 'play'});
     } else {
       $(this).removeClass('playing');
-      $(this).html('<img src="'+ url +'/assets/img/icons/play.svg", alt="Icon">');
+      $(this).html('<img src="/assets/img/icons/play.svg", alt="Icon">');
       socket.emit('control', {id: id, action: 'pause'});
     }
   });
@@ -56,7 +55,7 @@ $(document).ready( function() {
     socket.emit('control', {id: id, action: 'prev'});
 
     $('#play').addClass('playing');
-    $('#play').html('<img src="'+ url +'/assets/img/icons/pause.svg", alt="Icon">');
+    $('#play').html('<img src="/assets/img/icons/pause.svg", alt="Icon">');
   });
 
   // Next Track
@@ -64,7 +63,7 @@ $(document).ready( function() {
     socket.emit('control', {id: id, action: 'next'});
 
     $('#play').addClass('playing');
-    $('#play').html('<img src="'+ url +'/assets/img/icons/pause.svg", alt="Icon">');
+    $('#play').html('<img src="/assets/img/icons/pause.svg", alt="Icon">');
   });
 
   // Change Time
@@ -81,7 +80,7 @@ $(document).ready( function() {
       $(this).addClass("nowplay");
 
       $('#play').addClass('playing');
-      $('#play').html('<img src="'+ url +'/assets/img/icons/pause.svg", alt="Icon">');
+      $('#play').html('<img src="/assets/img/icons/pause.svg", alt="Icon">');
 
       socket.emit('control', {id: id, action: 'change', val: value});
     }

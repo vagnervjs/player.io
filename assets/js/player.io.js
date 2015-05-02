@@ -3,30 +3,32 @@
       vagnersantana.com
 */
 
-PlayerIO = function(){
+var PlayerIO = function () {
 
   this.player = $('#player').get(0);
   this.id = this.randomId();
+  this.first = true;
 
   //enable local files
   var URL = window.URL || window.webkitURL;
-  if(!URL){
-    $('#open').attr('disabled')
-  } else { 
-    $('#open').click( function(){ 
+  if (!URL) {
+    $('#open').attr('disabled');
+  } else {
+    $('#open').click(function () {
       $('#fileinp').click();
     });
-  };
+  }
   
   //get local files   
-  var playerContext= this;                       
-  $('#fileinp').change( function(){ 
+  var playerContext = this;
+  $('#fileinp').change(function () {
     var arrFile = this.files[0];
     var size = (this.files.length);
     for (var i = 0; i < size; i++) {
       var file = this.files[i];
       playerContext.checkFileType(file);
     };
+    playerContext.updatePlaylist();
     $('#fileinp').val(null);
   });
 

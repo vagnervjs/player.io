@@ -1,4 +1,4 @@
-!!! 5
+doctype html
 html(lang='en')
   head
     title #{title}
@@ -33,11 +33,11 @@ html(lang='en')
         .right(id="fullscreen")
           img(src="../assets/img/icons/fullscreen.svg", alt="Icon")
         h3(class="clear") Time (%)
-        input(type="range", name="slider", id="time", value="0", min="0", max="100", data-theme="a", data-track-theme="b")
+        input(type="range", name="slider", id="time", value="0", min="0", max="100", data-theme="c", data-track-theme="b")
     section 
       .playlist-mb
         h2 Playlist
-        ul(id="playlist", data-role="listview", data-inset="true")
+        ul(id="playlist", data-role="listview", class="ui-listview")
           li(id="no") 
             a(data-fileid="no") No files to play!
   //JS Files 
